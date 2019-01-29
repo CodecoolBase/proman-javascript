@@ -11,8 +11,13 @@ def boards():
 
 
 @app.route('/get-boards')
-def get_boards_with_notes():
+def get_boards():
     return jsonify(data_manager.get_boards_infos())
+
+
+@app.route('/get-cards/<board_id>')
+def get_cards(board_id):
+    return jsonify(data_manager.get_cards_for_board(board_id))
 
 
 def main():

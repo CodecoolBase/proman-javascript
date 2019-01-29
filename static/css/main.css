@@ -1,5 +1,4 @@
-#new-board-button {
-    float: right;
+#new-board-button, .new-card-button {
     border-radius: 10px;
     font-family: monospace;
     background-color: #D9D9D9;
@@ -8,19 +7,15 @@
     outline: none;
     transition-duration: 0.2s;
     font-size: 1.8rem;
+}
+
+#new-board-button {
+    float: right;
     transform: translate(0,58%);
     user-select: none;
 }
 
 .new-card-button {
-    border-radius: 10px;
-    font-family: monospace;
-    background-color: #D9D9D9;
-    box-shadow: 0 0 10px 0px;
-    border-width: 0px;
-    outline: none;
-    transition-duration: 0.2s;
-    font-size: 1.8rem;
     transform: translate(0,-19%);
     user-select: none;
     margin-left: 10px;
@@ -83,6 +78,10 @@ th, td {
     box-shadow: inset 0 0 10px 0px;
 }
 
+td {
+    vertical-align: baseline;
+}
+
 .board-body {
     width: -webkit-fill-available;
     height: 200px;
@@ -111,4 +110,13 @@ th, td {
     height: 91vh;
     margin-top: -0.5vh;
     padding: 0 6vw;
+}
+
+.my-card {
+    background-color: #2E2E2E;
+    color: white;
+    text-align: center;
+    padding: 5px;
+    border-radius: 5px;
+    margin: 6px;
 }

@@ -1,9 +1,9 @@
 import connection
 
 @connection.connection_handler
-def get_notes_for_board(cursor, board_id):
+def get_cards_for_board(cursor, board_id):
     cursor.execute("""
-                    SELECT cards.title, cards.is_archived, statuses.name
+                    SELECT cards.title, cards.is_archived, statuses.name AS status
                     FROM cards
                     JOIN statuses ON cards.status_id = statuses.id
                     WHERE cards.board_id = %(board_id)s
@@ -21,13 +21,3 @@ def get_boards_infos(cursor):
                     """)
 
     return cursor.fetchall()
-
-
-def get_boards_with_notes():
-    boards = get_boards_infos()
-
-    for board in boards:
-        id = board['id']
-        board['notes'] = get_notes_for_board(id)
-
-    return boards
