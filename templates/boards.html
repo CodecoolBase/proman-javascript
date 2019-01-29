@@ -1,18 +1,44 @@
 <!DOCTYPE html>
 <html lang="en">
-    <head>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <meta http-equiv="X-UA-Compatible" content="ie=edge">
-        <title>ProMan</title>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>ProMan</title>
 
-        <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/main.css') }}">
-        <script src="{{ url_for('static', filename='js/data_handler.js') }}" defer></script>
-        <script src="{{ url_for('static', filename='js/dom.js') }}" defer></script>
-        <script src="{{ url_for('static', filename='js/main.js') }}" defer></script>
-    </head>
-    <body>
-        <h1>ProMan</h1>
-        <div id="boards">Boards are loading...</div>
-    </body>
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/main.css') }}">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.3/css/all.css"
+          integrity="sha384-UHRtZLI+pbxtHCWp1t77Bi1L4ZtiqrqD80Kn4Z8NTSRyMA2Fd33n5dQ8lWUE00s/"
+          crossorigin="anonymous">
+    <link rel="shortcut icon" href="#">
+    <script src="{{ url_for('static', filename='js/data_handler.js') }}" defer></script>
+    <script src="{{ url_for('static', filename='js/dom.js') }}" defer></script>
+    <script src="{{ url_for('static', filename='js/main.js') }}" defer></script>
+</head>
+<body>
+<h1>ProMan</h1>
+<button id="add-new-card-button" type="submit">Add new card</button>
+<div id="boards">
+    <p>Boards are loading...</p>
+    <div id="board-one">
+        <p>Content</p>
+    </div>
+</div>
+
+
+<div id="card-container" class="card-modal">
+    <div class="card-modal-content">
+        <div id="card-data-container" class="card-container">
+            <span id="close-card-modal" class="card-close-button card-display-top-right">
+                <i class="fas fa-times"></i>
+            </span>
+            <div id="card-title" class="card-title-design">
+            </div>
+            <div id="card-description">
+                <p>Here comes the card's description</p>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
 </html>
