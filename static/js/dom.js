@@ -32,6 +32,10 @@ let dom = {
     closeCard: function () {
         const currentCard = document.getElementById('card-container');
         const cardTitle = document.getElementById('card-title');
+        const saveButton = document.getElementById("save-button");
+        if (saveButton != null) {
+            saveButton.remove();
+        }
         cardTitle.innerHTML = "";
         currentCard.style.display = 'none';
     },
@@ -39,7 +43,6 @@ let dom = {
         const currentCardTitle = document.getElementById('card-title');
         const newTitleValue = document.getElementById('new-title').value;
         const renameField = document.getElementById("new-title");
-
         const saveButton = document.getElementById("save-button");
         renameField.remove();
         saveButton.remove();
@@ -70,6 +73,7 @@ let dom = {
         const currentCardTitle = document.getElementById('card-title');
         const currentCardContainer = document.getElementById('card-data-container');
         const oldTitle = currentCardTitle.innerHTML;
+        currentCardTitle.dataset.oldtitle = oldTitle;
         currentCardTitle.innerHTML = "";
 
         dom.addRenameInputField(currentCardTitle, oldTitle);
@@ -82,6 +86,7 @@ let dom = {
         cardTitle.innerHTML = currentCardTitle;
         cardModal.style.display = 'block';
         cardTitle.addEventListener('click', dom.renameCardTitle);
+        addEventListener('keydown', dom.restoreWhenEscIsPressed);
     },
     addNewCard: function () {
         const board = document.getElementById('board-one');
@@ -92,5 +97,18 @@ let dom = {
         newCard.appendChild(newCardTitle);
         newCard.classList.add('card-design');
         board.appendChild(newCard);
+    },
+    restoreWhenEscIsPressed: function (event) {
+        const currentCardTitle = document.getElementById('card-title');
+        const oldTitle = currentCardTitle.dataset.oldtitle;
+        const saveTitleButton = document.getElementById('save-button');
+        const inputField = document.getElementById('new-title');
+        if (event.keyCode === 27 && saveTitleButton != null) {
+            console.log("Esc was pressed!");
+            saveTitleButton.remove();
+            inputField.remove();
+            currentCardTitle.innerHTML = oldTitle;
+            currentCardTitle.addEventListener('click', dom.renameCardTitle);
+        }
     }
 };
