@@ -1,5 +1,5 @@
-from flask import Flask, render_template
-
+from flask import Flask, render_template, request
+import data_manager
 app = Flask(__name__)
 
 
@@ -12,6 +12,13 @@ def boards():
 def main():
     app.run(debug=True)
 
+
+@app.route('/board', methods=['POST'])
+def new_board():
+    board_data = request.get_json()
+    data_manager.insert_new_board(board_data)
+
+    return "New board inserted!"
 
 if __name__ == '__main__':
     main()
