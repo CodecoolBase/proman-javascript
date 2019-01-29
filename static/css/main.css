@@ -1,3 +1,111 @@
-#boards {
-    background-color: green;
+.container {
+    margin-top: 1vh;
+}
+
+#new-board-button {
+    float: right;
+    border-radius: 10px;
+    font-family: monospace;
+    background-color: #D9D9D9;
+    box-shadow: 0 0 10px 0px;
+    border-width: 0px;
+    outline: none;
+    transition-duration: 0.2s;
+    font-size: 1.8rem;
+    transform: translate(0,58%);
+    user-select: none;
+}
+
+.new-card-button {
+    border-radius: 10px;
+    font-family: monospace;
+    background-color: #D9D9D9;
+    box-shadow: 0 0 10px 0px;
+    border-width: 0px;
+    outline: none;
+    transition-duration: 0.2s;
+    font-size: 1.8rem;
+    transform: translate(0,-19%);
+    user-select: none;
+    margin-left: 10px;
+
+}
+
+#new-board-button:hover, .new-card-button:hover {
+    color:white;
+    background-color: #454545;
+    transition-duration: 0.2s;
+    cursor: pointer;
+    outline: none;
+}
+
+h1 {
+    font-family: monospace !important;
+    font-size: 4.5rem !important;
+    user-select: none;
+    padding: 0 20px;
+}
+
+h2 {
+    font-family: fantasy !important;
+    font-size: 2.5rem !important;
+    user-select: none;
+    padding-top: 20px;
+    padding-left: 10px;
+}
+
+body {
+    position: fixed;
+    overflow: hidden;
+    width: 100vw;
+    height: 100vh;
+    background-image: url("/static/background.jpg");
+    background-repeat: repeat;
+}
+
+.board-header {
+    width: -webkit-fill-available;
+    height: 70px;
+    background-color: #DEDEDE;
+    box-shadow: 0 0 9px 0px, inset 0 0 46px;
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+}
+
+.darker {
+    background-color: #E5E5E5;
+}
+
+th {
+    font-family: monospace !important;
+    height: 50px;
+    text-align: center;
+    font-size: 1.5rem !important;
+}
+
+th, td {
+    box-shadow: inset 0 0 10px 0px;
+}
+
+.board-body {
+    width: -webkit-fill-available;
+    height: 200px;
+    background-color: #EDEDED;
+    box-shadow: 0 0 10px 0px;
+    table-layout: fixed
+}
+
+.board {
+    margin: 40px 0;
+}
+
+#header-background {
+    position: fixed;
+    width: 100vw;
+    height: 74px;
+    background-color: #CFCFCF;
+    top: 0;
+    opacity: 0.7;
+    z-index: -1;
+    border-bottom: 1px dashed;
 }
