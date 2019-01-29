@@ -37,19 +37,21 @@ let dom = {
     },
     saveNewTitle: function () {
         const currentCardTitle = document.getElementById('card-title');
-        const newTitle = document.getElementById('new-title').value;
+        const newTitleValue = document.getElementById('new-title').value;
+        const renameField = document.getElementById("new-title");
 
-        const renameField = document.createElement("input");
-        const saveButton = document.createElement("save-button");
+        const saveButton = document.getElementById("save-button");
         renameField.remove();
         saveButton.remove();
+        currentCardTitle.innerHTML = newTitleValue;
 
-        currentCardTitle.innerHTML = newTitle;
         // adatbázisba kimentés
+        currentCardTitle.addEventListener('click', dom.renameCardTitle);
 
     },
     renameCardTitle: function () {
         const currentCardTitle = document.getElementById('card-title');
+        const currentCardContainer = document.getElementById('card-data-container');
         const oldTitle = currentCardTitle.innerHTML;
         currentCardTitle.innerHTML = "";
 
@@ -66,7 +68,7 @@ let dom = {
         saveTitleButton.classList.add('fa-save');
         saveTitleButton.title = "Save title";
         saveTitleButton.addEventListener('click', dom.saveNewTitle);
-        currentCardTitle.appendChild(saveTitleButton);
+        currentCardContainer.appendChild(saveTitleButton);
     },
     openCurrentCard: function () {
         const currentCardTitle = event.target.childNodes[0].nodeValue;
@@ -74,7 +76,7 @@ let dom = {
         const cardTitle = document.getElementById('card-title');
         cardTitle.innerHTML = currentCardTitle;
         cardModal.style.display = 'block';
-        cardTitle.addEventListener('click', dom.renameCardTitle)
+        cardTitle.addEventListener('click', dom.renameCardTitle);
     },
     addNewCard: function () {
         const board = document.getElementById('board-one');
