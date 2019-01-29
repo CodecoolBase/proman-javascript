@@ -41,16 +41,19 @@ let dom = {
     },
     saveNewTitle: function () {
         const currentCardTitle = document.getElementById('card-title');
-        const newTitleValue = document.getElementById('new-title').value;
+        const newTitle = document.getElementById('new-title').value;
         const renameField = document.getElementById("new-title");
         const saveButton = document.getElementById("save-button");
+        dom.restoreCardModal(currentCardTitle, renameField, newTitle, saveButton)
+
+    },
+    restoreCardModal: function (currentCardTitle, renameField, newTitle, saveButton) {
         renameField.remove();
         saveButton.remove();
-        currentCardTitle.innerHTML = newTitleValue;
+        currentCardTitle.innerHTML = newTitle;
 
-        // adatbázisba kimentés
+        // adatbázisba kimentés, restoreWhenEscIsPressed-nél is enterre!!
         currentCardTitle.addEventListener('click', dom.renameCardTitle);
-
     },
     addRenameInputField: function (currentCardTitle, oldTitle) {
         const renameInputField = document.createElement("input");
@@ -59,6 +62,7 @@ let dom = {
         renameInputField.setAttribute("value", oldTitle);
         currentCardTitle.appendChild(renameInputField);
         currentCardTitle.removeEventListener('click', dom.renameCardTitle);
+        renameInputField.focus();
     },
     addNewTitleSaveButton: function (currentCardContainer) {
         const saveTitleButton = document.createElement('i');
@@ -86,7 +90,7 @@ let dom = {
         cardTitle.innerHTML = currentCardTitle;
         cardModal.style.display = 'block';
         cardTitle.addEventListener('click', dom.renameCardTitle);
-        addEventListener('keydown', dom.restoreWhenEscIsPressed);
+        addEventListener('keydown', dom.actionWhenButtonIsPressed);
     },
     addNewCard: function () {
         const board = document.getElementById('board-one');
@@ -98,17 +102,15 @@ let dom = {
         newCard.classList.add('card-design');
         board.appendChild(newCard);
     },
-    restoreWhenEscIsPressed: function (event) {
+    actionWhenButtonIsPressed: function (event) {
         const currentCardTitle = document.getElementById('card-title');
         const oldTitle = currentCardTitle.dataset.oldtitle;
-        const saveTitleButton = document.getElementById('save-button');
-        const inputField = document.getElementById('new-title');
-        if (event.keyCode === 27 && saveTitleButton != null) {
-            console.log("Esc was pressed!");
-            saveTitleButton.remove();
-            inputField.remove();
-            currentCardTitle.innerHTML = oldTitle;
-            currentCardTitle.addEventListener('click', dom.renameCardTitle);
+        const saveButton = document.getElementById('save-button');
+        const renameField = document.getElementById('new-title');
+        if (event.keyCode === 27 && saveButton != null) {
+            dom.restoreCardModal(currentCardTitle, renameField, oldTitle, saveButton);
+        } else if (event.keyCode === 13 && saveButton != null) {
+            dom.saveNewTitle();
         }
     }
 };
