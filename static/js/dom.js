@@ -49,19 +49,15 @@ let dom = {
         currentCardTitle.addEventListener('click', dom.renameCardTitle);
 
     },
-    renameCardTitle: function () {
-        const currentCardTitle = document.getElementById('card-title');
-        const currentCardContainer = document.getElementById('card-data-container');
-        const oldTitle = currentCardTitle.innerHTML;
-        currentCardTitle.innerHTML = "";
-
-        const renameField = document.createElement("input");
-        renameField.id = "new-title";
-        renameField.setAttribute("type", "text");
-        renameField.setAttribute("value", oldTitle);
-        currentCardTitle.appendChild(renameField);
+    addRenameInputField: function (currentCardTitle, oldTitle) {
+        const renameInputField = document.createElement("input");
+        renameInputField.id = "new-title";
+        renameInputField.setAttribute("type", "text");
+        renameInputField.setAttribute("value", oldTitle);
+        currentCardTitle.appendChild(renameInputField);
         currentCardTitle.removeEventListener('click', dom.renameCardTitle);
-
+    },
+    addNewTitleSaveButton: function (currentCardContainer) {
         const saveTitleButton = document.createElement('i');
         saveTitleButton.id = "save-button";
         saveTitleButton.classList.add('far');
@@ -69,6 +65,15 @@ let dom = {
         saveTitleButton.title = "Save title";
         saveTitleButton.addEventListener('click', dom.saveNewTitle);
         currentCardContainer.appendChild(saveTitleButton);
+    },
+    renameCardTitle: function () {
+        const currentCardTitle = document.getElementById('card-title');
+        const currentCardContainer = document.getElementById('card-data-container');
+        const oldTitle = currentCardTitle.innerHTML;
+        currentCardTitle.innerHTML = "";
+
+        dom.addRenameInputField(currentCardTitle, oldTitle);
+        dom.addNewTitleSaveButton(currentCardContainer);
     },
     openCurrentCard: function () {
         const currentCardTitle = event.target.childNodes[0].nodeValue;
