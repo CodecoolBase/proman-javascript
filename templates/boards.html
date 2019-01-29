@@ -5,47 +5,37 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <meta http-equiv="X-UA-Compatible" content="ie=edge">
         <title>ProMan</title>
-        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css">
-        <!-- MODAL STUFF -->
+        <!-- MODAL STUFF
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.6/umd/popper.min.js"></script>
-        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js"></script>
-
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js"></script>-->
+        <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
         <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/main.css') }}">
         <!-- <script src="{{ url_for('static', filename='js/data_handler.js') }}" defer></script> -->
-        <script src="{{ url_for('static', filename='js/dom.js') }}" defer></script>
+        <!-- <script src="{{ url_for('static', filename='js/dom.js') }}" defer></script> -->
         <script type="module" src="{{ url_for('static', filename='js/main.js') }}" defer></script>
     </head>
     <body>
         <h1>ProMan</h1>
        <!-- Button to Open the Modal -->
-        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal">
+        <button id="new-board-modal" type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal">
           New Board
         </button>
 
         <!-- The Modal -->
-        <div class="modal" id="myModal">
-          <div class="modal-dialog">
-            <div class="modal-content">
 
-              <!-- Modal Header -->
-              <div class="modal-header">
-                <h4 class="modal-title">New Board</h4>
-                <button type="button" class="close" data-dismiss="modal">&times;</button>
-              </div>
+<div>
+  <div id="myModal" class="w3-modal">
+    <div class="w3-modal-content">
+      <div class="w3-container">
+        <input id="new-board-title" type="text" value="New Board">
+        <p id="new-board-error"></p>
+        <button id="new-board-button" type="button" class="btn btn-primary">Save</button>
+        <button id="new-board-close" type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
 
-              <!-- Modal body -->
-              <div class="modal-body">
-                <input id="new-board-title" type="text" value="New Board">
-              </div>
-
-              <!-- Modal footer -->
-              <div class="modal-footer">
-                <button id="new-board-button" type="button" class="btn btn-primary" data-dismiss="modal">Save</button>
-                <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
-              </div>
-            </div>
-          </div>
-        </div>
     </body>
 </html>

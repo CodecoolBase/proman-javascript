@@ -1,5 +1,7 @@
 // It uses data_handler.js to visualize elements
-let dom = {
+import {dataHandler} from "./data_handler.js";
+
+export let dom = {
     loadBoards: function () {
         // retrieves boards and makes showBoards called
     },
@@ -28,6 +30,34 @@ let dom = {
         }
 
         return elementToExtend.lastChild;
+    },
+    checkEmptyTitle: function(title, errorId){
+        let errorHtml = document.getElementById(errorId);
+        if (title.trim() == ""){
+            errorHtml.innerHTML = "Please input a title.";
+            return false;
+        }
+
+        return true;
+    },
+    assignNewBoardEventListeners: function(){
+        let newBoardModalOpen = document.getElementById('new-board-modal');
+        newBoardModalOpen.addEventListener('click', dom.openNewBoardModal);
+
+        let newBoardModalClose = document.getElementById('new-board-close');
+        newBoardModalClose.addEventListener('click', dom.closeNewBoardModal);
+
+        let newBoard = document.getElementById('new-board-button');
+        newBoard.addEventListener('click', dataHandler.createNewBoard);
+
+    },
+    openNewBoardModal: function(){
+        let modal = document.getElementById('myModal');
+        modal.style.display = 'block';
+    },
+    closeNewBoardModal: function(){
+        let modal = document.getElementById('myModal');
+        modal.style.display = 'none';
     }
     // here comes more features
 };

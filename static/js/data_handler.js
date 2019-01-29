@@ -1,6 +1,6 @@
 // this object contains the functions which handle the data and its reading/writing
 // feel free to extend and change to fit your needs
-import {sampleData} from "./sample_data.js";
+import {dom} from "./dom.js";
 // (watch out: when you would like to use a property/function of an object from the
 // object itself then you must use the 'this' keyword before. For example: 'this._data' below)
 export let dataHandler = {
@@ -35,35 +35,41 @@ export let dataHandler = {
     getCard: function (cardId, callback) {
         // the card is retrieved and then the callback function is called with the card
     },
-    createNewBoard: function (boardTitle, callback) {
-        // creates new board, saves it and calls the callback function with its data
-        // ajax to server endpoint where i insert a new row into boards
-        boardTitle = document.getElementById('new-board-title').value;
-        let boardData = {
-            title: boardTitle,
-            user_id: 1,
-            is_public: true
+
+    // creates new board, saves it and calls the callback function with its data
+
+    createNewBoard: function () {
+
+            let boardTitle = document.getElementById('new-board-title').value;
+            let errorId = 'new-board-error';
+
+            let boardData = {
+                title: boardTitle.trim(),
+                user_id: 1,
+                is_public: true
+            };
+            let url = '/board';
+
+            if(dom.checkEmptyTitle(boardTitle, errorId)){
+                fetch(url, {
+                    method: 'POST',
+                    body: JSON.stringify(boardData), // data can be `string` or {object}!
+                    headers: {
+                        'Content-Type': 'application/json'
+                    }
+                }).then(function (response) {
+                    if (response.ok) {
+                        // hide modal
+                        dom.closeNewBoardModal();
+                        console.log("New Board created!");
+                    }
+                }).catch(function (error) {
+                    console.log('There has been a problem with your fetch operation: ', error.message);
+                });
+            }
+        },
+        createNewCard: function (cardTitle, boardId, statusId, callback) {
+            // creates new card, saves it and calls the callback function with its data
         }
-        let url = '/board';
-
-        fetch(url, {
-            method: 'POST',
-            body: JSON.stringify(boardData), // data can be `string` or {object}!
-            headers:{
-                'Content-Type': 'application/json'
-            }
-        }).then(function(response) {
-            if(response.ok) {
-                console.log("New Board created!");
-            }
-            }).catch(function(error) {
-                console.log('There has been a problem with your fetch operation: ', error.message);
-        });
-
-    },
-
-    createNewCard: function (cardTitle, boardId, statusId, callback) {
-        // creates new card, saves it and calls the callback function with its data
-    }
     // here comes more features
 };
