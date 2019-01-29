@@ -1,4 +1,4 @@
-from flask import Flask, render_template, request
+from flask import Flask, render_template, request, jsonify
 import data_manager
 app = Flask(__name__)
 
@@ -17,8 +17,7 @@ def main():
 def new_board():
     board_data = request.get_json()
     data_manager.insert_new_board(board_data)
-
-    return "New board inserted!"
+    return jsonify("New board inserted!")
 
 if __name__ == '__main__':
     main()
