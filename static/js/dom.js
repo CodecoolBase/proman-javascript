@@ -117,6 +117,7 @@ export let dom = {
         const modal = document.getElementById('new-board-modal');
         modal.style.display = 'block';
         const newBoardTitle = document.getElementById('new-board-title');
+        newBoardTitle.value= "New Board";
         newBoardTitle.onfocus = function(){
             newBoardTitle.value = "";
         }
