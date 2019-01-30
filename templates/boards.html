@@ -9,15 +9,28 @@
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css"
               integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS"
               crossorigin="anonymous">
+        <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.0/css/all.css"
+              integrity="sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zFSJ"
+              crossorigin="anonymous">
         <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/main.css') }}">
-        <script src="{{ url_for('static', filename='js/data_handler.js') }}" defer></script>
-        <script src="{{ url_for('static', filename='js/dom.js') }}" defer></script>
-        <script src="{{ url_for('static', filename='js/main.js') }}" defer></script>
+        <script type="module" src="{{ url_for('static', filename='js/main.js') }}" defer></script>
     </head>
     <body>
         <h1>ProMan <button id="new-board-button"> + New Board</button></h1>
         <div id="header-background"></div>
         <div id="boards">
+        </div>
+        <div>
+          <div id="new-board-modal" class="card-modal">
+            <div class="card-modal-content">
+              <div class="card-container">
+                <input id="new-board-title" type="text" value="New Board">
+                <p id="new-board-error"></p>
+                <button id="new-board-save" type="button" class="text-button">SAVE</button>
+                <i id="new-board-close" class="fas fa-skull my-skull-close-icon"></i>
+              </div>
+            </div>
+          </div>
         </div>
     </body>
 </html>

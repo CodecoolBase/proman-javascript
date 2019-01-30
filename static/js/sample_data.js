@@ -3,7 +3,7 @@
 
 let keyInLocalStorage = 'proman-data';
 
-let sampleData = {
+export let sampleData = {
     "statuses": [
         {
             "id": 1,
@@ -24,14 +24,18 @@ let sampleData = {
     ],
     "boards": [
         {
-            "id": 1,
-            "title": "Test Board 1",
-            "is_active": true
+            "id": 3,
+            "title": "Test Board 3",
+            "is_active": true,
+            "user_id": 1,
+            "is_public": true
         },
         {
             "id": 2,
-            "title": "Test Board 2",
-            "is_active": true
+            "title": "Test Board, 2",
+            "is_active": true,
+            "user_id": 1,
+            "is_public": true
         }
     ],
     "cards": [
