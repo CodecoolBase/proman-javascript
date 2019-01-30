@@ -48,7 +48,7 @@ let dataHandler = {
             order_num: orderNum,
             is_archived: false
         };
-        const url = '/card';
+        const url = '/card/new-card';
 
         if (dom.checkEmptyTitle(cardTitle, errorId)) {
             fetch(url, {
@@ -59,11 +59,11 @@ let dataHandler = {
                 }
             }).then(function (response) {
                 if (response.ok) {
-                    dom.loadBoards(true);
-                    // dom.closeNewBoardModal();
+                    dom.emptyBoard(boardId);
+                    dom.loadCards(boardId);
                 }
             });
         }
-    }
+    },
     // here comes more features
 };
