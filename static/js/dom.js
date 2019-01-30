@@ -13,7 +13,7 @@ let dom = {
             const boardToAdd = this.createBoardElement(board.title, board.id);
             document.querySelector('#boards').appendChild(boardToAdd);
 
-            const addNewCardToBoardButton = document.querySelectorAll('.new-card-button')[(board.id-1)];
+            const addNewCardToBoardButton = document.querySelectorAll('.new-card-button')[(board.id - 1)];
             addNewCardToBoardButton.dataset.boardId = board.id;
             addNewCardToBoardButton.addEventListener('click', this.addNewCard);
             this.loadCards(board.id);
@@ -68,13 +68,17 @@ let dom = {
         return board
     },
     addNewCard: function () {
-        const boardId = event.target.dataset.boardId;
+        const boardId = parseInt(event.target.dataset.boardId);
         const board = document.querySelector(`.board[data-id="${boardId}"]`);
-        const newCard = dom.createCardElement('New card title');
+
+        const cardTitle = 'New card title';    //TODO ez jöjjön majd modalból ->
+        const newCard = dom.createCardElement(cardTitle);
         newCard.addEventListener('click', dom.openCurrentCard);
-        let allColumns = board.querySelectorAll('td');
+
+        const allColumns = board.querySelectorAll('td');
         allColumns[0].appendChild(newCard);
-        //    TODO gomb megnyomáskor is legyen modal
+        const orderNum = allColumns[0].childNodes.length;
+        // dataHandler.createNewCard(cardTitle, boardId, orderNum);
     },
     createCardElement: function (title) {
         let card = document.createElement('div');
@@ -83,33 +87,25 @@ let dom = {
 
         return card
     },
-    closeCard: function () {
-        const modal = document.getElementById('card-container');
-        // TODo modalnak elég lenne a card-modal content??
+    openCurrentCard: function () {
+        const currentCardTitle = event.target.childNodes[0].nodeValue;
+        const cardModal = document.getElementById('card-container');
         const cardTitle = document.getElementById('card-title');
-        const saveButton = document.getElementById('save-button');
-        if (saveButton != null) {
-            saveButton.remove();
-        }
-        cardTitle.innerHTML = "";   //TODO kell ez, ha adatbázisbl hívja az adatot?
-        modal.style.display = 'none';
+        cardTitle.innerHTML = currentCardTitle;
+        cardModal.style.display = 'block';
+        cardTitle.addEventListener('click', dom.renameCardTitle);
+        addEventListener('keydown', dom.actionWhenButtonIsPressed);
+        cardModal.addEventListener('click', dom.cardModalClickEventHandlers);
     },
-    saveNewTitle: function () {
+    renameCardTitle: function () {
         const currentCardTitle = document.getElementById('card-title');
-        const newTitle = document.getElementById('new-title').value;
-        const renameField = document.getElementById("new-title");
-        const saveButton = document.getElementById("save-button");
-        dom.restoreCardModal(currentCardTitle, renameField, newTitle, saveButton)
+        const currentCardContainer = document.getElementById('card-data-container');
+        const oldTitle = currentCardTitle.innerHTML;
+        currentCardTitle.dataset.oldtitle = oldTitle;
+        currentCardTitle.innerHTML = "";
 
-    },
-    restoreCardModal: function (currentCardTitle, renameField, newTitle, saveButton) {
-        currentCardTitle.innerHTML = newTitle;
-        currentCardTitle.dataset.oldtitle = newTitle;
-        renameField.remove();
-        saveButton.remove();
-
-        // TODO adatbázisba kimentés, restoreWhenEscIsPressed-nél is enterre!!
-        currentCardTitle.addEventListener('click', dom.renameCardTitle);
+        dom.addRenameInputField(currentCardTitle, oldTitle);
+        dom.addNewTitleSaveButton(currentCardContainer);
     },
     addRenameInputField: function (currentCardTitle, oldTitle) {
         const renameInputField = document.createElement("input");
@@ -131,25 +127,47 @@ let dom = {
         saveTitleButton.addEventListener('click', dom.saveNewTitle);
         currentCardContainer.appendChild(saveTitleButton);
     },
-    renameCardTitle: function () {
+    cardModalClickEventHandlers: function (event) {
         const currentCardTitle = document.getElementById('card-title');
-        const currentCardContainer = document.getElementById('card-data-container');
-        const oldTitle = currentCardTitle.innerHTML;
-        currentCardTitle.dataset.oldtitle = oldTitle;
-        currentCardTitle.innerHTML = "";
+        const oldTitle = currentCardTitle.dataset.oldtitle;
+        const saveButton = document.getElementById('save-button');
+        const renameInputField = document.getElementById('new-title');
 
-        dom.addRenameInputField(currentCardTitle, oldTitle);
-        dom.addNewTitleSaveButton(currentCardContainer);
+        if (event.target !== currentCardTitle && saveButton != null) {
+            dom.restoreCardModalBeforeEdit(currentCardTitle, renameInputField, oldTitle, saveButton);
+        }
     },
-    openCurrentCard: function () {
-        const currentCardTitle = event.target.childNodes[0].nodeValue;
-        const cardModal = document.getElementById('card-container');
+    restoreCardModalBeforeEdit: function (currentCardTitle, renameField, newTitle, saveButton) {
+        currentCardTitle.innerHTML = newTitle;
+        currentCardTitle.dataset.oldtitle = newTitle;
+        renameField.remove();
+        saveButton.remove();
+        currentCardTitle.addEventListener('click', dom.renameCardTitle);
+    },
+    saveNewTitle: function () {
+        const currentCardTitle = document.getElementById('card-title');
+        const newTitle = document.getElementById('new-title').value;
+        const renameField = document.getElementById("new-title");
+        const saveButton = document.getElementById("save-button");
+        // TODO adatbázisba kimentés, restoreWhenEscIsPressed-nél is enterre!!
+
+        dom.restoreCardModalBeforeEdit(currentCardTitle, renameField, newTitle, saveButton)
+    },
+    clearCards: function (board) {
+        const firstColumn = board.querySelectorAll('td')[0];
+        console.log(firstColumn.innerHTML);
+        // firstColumn.innerHTML = "";
+    },
+    closeCard: function () {
+        const modal = document.getElementById('card-container');
+        // TODo modalnak elég lenne a card-modal content??
         const cardTitle = document.getElementById('card-title');
-        cardTitle.innerHTML = currentCardTitle;
-        cardModal.style.display = 'block';
-        cardTitle.addEventListener('click', dom.renameCardTitle);
-        addEventListener('keydown', dom.actionWhenButtonIsPressed);
-        cardModal.addEventListener('click', dom.cardModalClickEventHandlers);
+        const saveButton = document.getElementById('save-button');
+        if (saveButton != null) {
+            saveButton.remove();
+        }
+        cardTitle.innerHTML = "";   //TODO kell ez, ha adatbázisból hívja az adatot?
+        modal.style.display = 'none';
     },
     actionWhenButtonIsPressed: function (event) {
         const currentCardTitle = document.getElementById('card-title');
@@ -161,19 +179,17 @@ let dom = {
         const enterButton = 13;
 
         if (event.keyCode === escButton && saveButton != null) {
-            dom.restoreCardModal(currentCardTitle, renameField, oldTitle, saveButton);
+            dom.restoreCardModalBeforeEdit(currentCardTitle, renameField, oldTitle, saveButton);
         } else if (event.keyCode === enterButton && saveButton != null) {
             dom.saveNewTitle();
         }
     },
-    cardModalClickEventHandlers: function (event) {
-        const currentCardTitle = document.getElementById('card-title');
-        const oldTitle = currentCardTitle.dataset.oldtitle;
-        const saveButton = document.getElementById('save-button');
-        const renameInputField = document.getElementById('new-title');
-
-        if (event.target !== currentCardTitle && saveButton != null) {
-            dom.restoreCardModal(currentCardTitle, renameInputField, oldTitle, saveButton);
+    checkEmptyTitle: function (title, errorId) {
+        const errorElement = document.getElementById(errorId);
+        if (title.trim() === "") {
+            errorElement.innerHTML = "Please input a title.";
+            return false;
         }
+        return true;
     }
 };
