@@ -35,7 +35,6 @@ DROP TABLE IF EXISTS public.boards;
 CREATE TABLE boards (
     id serial NOT NULL,
     title text,
-    is_active boolean,
     user_id integer,
     is_public boolean
 );
@@ -85,8 +84,8 @@ INSERT INTO statuses VALUES (4, 'Done');
 SELECT pg_catalog.setval('statuses_id_seq', 5, true);
 
 
-INSERT INTO boards VALUES (1, 'Test Board 1', true, 1, true);
-INSERT INTO boards VALUES (2, 'Test Board 2', true, 1, true);
+INSERT INTO boards VALUES (1, 'Test Board 1', 1, true);
+INSERT INTO boards VALUES (2, 'Test Board 2', 1, true);
 SELECT pg_catalog.setval('boards_id_seq', 3, true);
 
 
