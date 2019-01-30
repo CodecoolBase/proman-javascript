@@ -1,6 +1,8 @@
 // It uses data_handler.js to visualize elements
-let dom = {
-    loadBoards: function () {
+import {dataHandler} from "./data_handler.js";
+
+export let dom = {
+    loadBoards: function (last = false) {
         // retrieves boards and makes showBoards called
         fetch('/get-boards')
             .then((response) => response.json())
@@ -214,5 +216,37 @@ let dom = {
         for (let i = 0; i < allColumn.length; i++) {
             allColumn[i].innerHTML = "";
         }
+    },
+    checkBoardErrorMessage: function(){
+        const errorElement = document.getElementById('new-board-error');
+        errorElement.innerHTML = "";
+
+    },
+    assignNewBoardEventListeners: function(){
+        const newBoardModalOpen = document.getElementById('new-board-button');
+        newBoardModalOpen.addEventListener('click', dom.openNewBoardModal);
+
+        const newBoardModalClose = document.getElementById('new-board-close');
+        newBoardModalClose.addEventListener('click', dom.closeNewBoardModal);
+
+        const newBoard = document.getElementById('new-board-save');
+        newBoard.addEventListener('click', dataHandler.createNewBoard);
+
+        const newBoardTitle = document.getElementById('new-board-title');
+        newBoardTitle.addEventListener('keyup', dom.checkBoardErrorMessage)
+
+    },
+    openNewBoardModal: function(){
+        const modal = document.getElementById('new-board-modal');
+        modal.style.display = 'block';
+        const newBoardTitle = document.getElementById('new-board-title');
+        newBoardTitle.value= "New Board";
+        newBoardTitle.onfocus = function(){
+            newBoardTitle.value = "";
+        }
+    },
+    closeNewBoardModal: function(){
+        const modal = document.getElementById('new-board-modal');
+        modal.style.display = 'none';
     }
 };

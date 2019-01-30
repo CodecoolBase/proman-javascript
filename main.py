@@ -10,6 +10,13 @@ def boards():
     return render_template('boards.html')
 
 
+@app.route('/board', methods=['POST'])
+def new_board():
+    board_data = request.get_json()
+    data_manager.insert_new_board(board_data)
+    return jsonify("New board inserted!")
+
+
 @app.route('/get-boards')
 def get_boards():
     return jsonify(data_manager.get_boards_infos())

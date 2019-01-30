@@ -1,4 +1,4 @@
-#new-board-button, .new-card-button {
+#new-board-button, .new-card-button, .text-button {
     border-radius: 10px;
     font-family: monospace;
     background-color: #D9D9D9;
@@ -22,7 +22,7 @@
 
 }
 
-#new-board-button:hover, .new-card-button:hover {
+#new-board-button:hover, .new-card-button:hover, .text-button:hover {
     color:white;
     background-color: #454545;
     transition-duration: 0.2s;
@@ -125,18 +125,7 @@ td {
 
 /*Card modal related css*/
 
-.fa-times {
-    transition: 0.3s;
-    cursor: pointer;
-    opacity: 0.7;
-}
-
-.fa-times:hover {
-    cursor: pointer;
-    opacity: 1;
-}
-
-#card-container {
+.card-modal {
     z-index: 3;
     display: none;
     padding-top: 5vw;
@@ -156,34 +145,18 @@ td {
     position: relative;
     padding-top: 2.5%;
     outline: 0;
-    width: 60%;
     height: auto;
+    width: 45%;
     border-radius: 5px;
+    top: 20vh;
+    box-shadow: 0px 0px 15vw 0vw black;
+    font-family: fantasy;
 }
 
 .card-container {
     padding: 2vw;
     text-align: -webkit-center;
     height: auto;
-}
-
-.card-close-button {
-    border: none;
-    display: inline-block;
-    padding: 0.5vw 2vw;
-    vertical-align: middle;
-    overflow: hidden;
-    text-decoration: none;
-    color: inherit;
-    background-color: inherit;
-    text-align: center;
-    cursor: pointer;
-    white-space: nowrap;
-    transition: 0.5s;
-}
-
-.card-close-button:hover {
-    background-color: #cccccc;
 }
 
 .card-display-top-right {
@@ -212,4 +185,28 @@ input {
     font-size: 2.4vw;
     text-align: center;
     font-weight: bold;
+    border: 0;
+    border-bottom: 1px dashed black;
+    width: 400px;
+    outline: none;
+    margin: 0 4vh;
+}
+
+input::selection {
+    color: black;
+    background-color: rgba(0, 0, 0, 0.3);
+}
+
+.my-skull-close-icon {
+    position: absolute;
+    top: 1vh;
+    right: 1vh;
+    font-size: 2em;
+    cursor: pointer;
+    transition-duration: 0.2s;
+}
+
+.my-skull-close-icon:hover {
+    transform: scale(1.1);
+    transition-duration: 0.2s;
 }
