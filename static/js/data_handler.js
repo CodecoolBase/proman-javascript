@@ -66,4 +66,27 @@ let dataHandler = {
         }
     },
     // here comes more features
+    saveNewCardTitle: function (currentCardId, newTitle) {
+        const errorId = 'new-board-error';
+
+        const newCardTitle = {
+            id: currentCardId,
+            title: newTitle.trim(),
+        };
+        const url = '/card/new-title';
+
+        if (dom.checkEmptyTitle(newTitle, errorId)) {
+            fetch(url, {
+                method: 'POST',
+                body: JSON.stringify(newCardTitle),
+                headers: {
+                    'Content-Type': 'application/json'
+                }
+            }).then(function (response) {
+                if (response.ok) {
+                    console.log('New card title was saved');
+                }
+            });
+        }
+    }
 };
