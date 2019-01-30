@@ -86,7 +86,7 @@ SELECT pg_catalog.setval('statuses_id_seq', 5, true);
 
 INSERT INTO boards VALUES (1, 'Test Board 1', 1, true);
 INSERT INTO boards VALUES (2, 'Test Board 2', 1, true);
-SELECT pg_catalog.setval('boards_id_seq', 3, true);
+SELECT pg_catalog.setval('boards_id_seq', 2, true);
 
 
 INSERT INTO cards VALUES (1, 'task1', 1, 1, 1, false);
