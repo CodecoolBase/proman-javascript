@@ -1,24 +1,26 @@
 <!DOCTYPE html>
 <html lang="en">
-    <head>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
-        <meta http-equiv="X-UA-Compatible" content="ie=edge">
-        <title>ProMan</title>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>ProMan</title>
 
-        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css"
-              integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS"
-              crossorigin="anonymous">
-        <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/main.css') }}">
-        <script src="{{ url_for('static', filename='js/data_handler.js') }}" defer></script>
-        <script src="{{ url_for('static', filename='js/dom.js') }}" defer></script>
-        <script src="{{ url_for('static', filename='js/main.js') }}" defer></script>
-    </head>
-    <body>
-        <h1>ProMan <button id="new-board-button"> + New Board</button></h1>
-        <div id="header-background"></div>
-        <div id="boards">
-        </div>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css"
+          integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS"
+          crossorigin="anonymous">
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/main.css') }}">
+    <script src="{{ url_for('static', filename='js/data_handler.js') }}" defer></script>
+    <script src="{{ url_for('static', filename='js/dom.js') }}" defer></script>
+    <script src="{{ url_for('static', filename='js/main.js') }}" defer></script>
+</head>
+<body>
+<h1>ProMan
+    <button id="new-board-button"> + New Board</button>
+</h1>
+<div id="header-background"></div>
+<div id="boards">
+</div>
 
 <div id="card-container" class="card-modal">
     <div class="card-modal-content">
