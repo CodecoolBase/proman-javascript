@@ -38,6 +38,7 @@
     outline: 0;
     width: 60%;
     height: auto;
+    border-radius: 5px;
 }
 
 .card-container {
