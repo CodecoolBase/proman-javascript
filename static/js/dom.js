@@ -13,6 +13,7 @@ export let dom = {
         // it adds necessary event listeners also
         for (const board of boards) {
             const boardToAdd = this.createBoardElement(board.title, board.id);
+            boardToAdd.dataset.boardId = board.id;
             document.querySelector('#boards').appendChild(boardToAdd);
 
             this.loadCards(board.id);
@@ -128,20 +129,16 @@ export let dom = {
         renameInputField.setSelectionRange(inputLength, inputLength);
     },
     addNewTitleSaveButton: function (currentCardContainer) {
-        const saveTitleButton = document.createElement('i');
-        saveTitleButton.id = "save-button";
-        saveTitleButton.classList.add('far');
-        saveTitleButton.classList.add('fa-save');
-
-        saveTitleButton.title = "Save title";
+        const saveTitleButton = document.createElement('button');
+        saveTitleButton.id = "save-title-button";
+        saveTitleButton.innerHTML = "SAVE";
         saveTitleButton.addEventListener('click', dom.saveNewTitle);
-
         currentCardContainer.appendChild(saveTitleButton);
     },
     cardModalClickEvents: function (event) {
         const currentCardTitle = document.getElementById('card-title');
         const oldTitle = currentCardTitle.dataset.oldtitle;
-        const saveButton = document.getElementById('save-button');
+        const saveButton = document.getElementById('save-title-button');
         const renameInputField = document.getElementById('new-title');
 
         if (event.target !== currentCardTitle && saveButton != null) {
@@ -162,7 +159,7 @@ export let dom = {
         const currentCardTitle = document.getElementById('card-title');
         const newTitle = document.getElementById('new-title').value;
         const renameField = document.getElementById("new-title");
-        const saveButton = document.getElementById("save-button");
+        const saveButton = document.getElementById("save-title-button");
 
         const modal = document.getElementById('card-container');
         const currentCardId = parseInt(modal.dataset.cardId);
@@ -177,7 +174,7 @@ export let dom = {
     },
     closeCard: function () {
         const modal = document.getElementById('card-container');
-        const saveButton = document.getElementById('save-button');
+        const saveButton = document.getElementById('save-title-button');
         if (saveButton != null) {
             saveButton.remove();
         }
@@ -186,7 +183,7 @@ export let dom = {
     cardModalButtonPressEvents: function (event) {
         const currentCardTitle = document.getElementById('card-title');
         const oldTitle = currentCardTitle.dataset.oldtitle;
-        const saveButton = document.getElementById('save-button');
+        const saveButton = document.getElementById('save-title-button');
         const renameInputField = document.getElementById('new-title');
 
         const escButton = 27;
