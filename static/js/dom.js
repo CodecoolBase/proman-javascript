@@ -111,9 +111,13 @@ let dom = {
         const oldTitle = currentCardTitle.dataset.oldtitle;
         const saveButton = document.getElementById('save-button');
         const renameField = document.getElementById('new-title');
-        if (event.keyCode === 27 && saveButton != null) {
+
+        const escButton = 27;
+        const enterButton = 13;
+
+        if (event.keyCode === escButton && saveButton != null) {
             dom.restoreCardModal(currentCardTitle, renameField, oldTitle, saveButton);
-        } else if (event.keyCode === 13 && saveButton != null) {
+        } else if (event.keyCode === enterButton && saveButton != null) {
             dom.saveNewTitle();
         }
     },
