@@ -29,7 +29,7 @@ let dom = {
 
         for (const card of cards) {
             for (const column of allColumns) {
-                if (card.status === column.dataset.status) {
+                if (card.status == column.dataset.status) {
                     const cardToAdd = this.createCardElement(card.title);
                     column.appendChild(cardToAdd)
                 }
@@ -68,10 +68,10 @@ let dom = {
                         <th class="darker">Done</th>
                     </tr>
                     <tr>
-                        <td data-status="New"></td>
-                        <td data-status="In progress" class="darker"></td>
-                        <td data-status="Testing"></td>
-                        <td data-status="Done" class="darker"></td>
+                        <td data-status=1></td>
+                        <td data-status=2 class="darker"></td>
+                        <td data-status=3></td>
+                        <td data-status=4 class="darker"></td>
                     </tr>
                 </table>`;
         return board

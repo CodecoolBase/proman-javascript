@@ -3,7 +3,7 @@ import connection
 @connection.connection_handler
 def get_cards_for_board(cursor, board_id):
     cursor.execute("""
-                    SELECT cards.title, cards.is_archived, statuses.name AS status
+                    SELECT cards.title, cards.is_archived, statuses.id AS status
                     FROM cards
                     JOIN statuses ON cards.status_id = statuses.id
                     WHERE cards.board_id = %(board_id)s
