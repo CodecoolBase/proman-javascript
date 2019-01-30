@@ -39,21 +39,22 @@ export let dataHandler = {
     // creates new board, saves it and calls the callback function with its data
 
     createNewBoard: function () {
+        //TODO focus on title input
 
-            let boardTitle = document.getElementById('new-board-title').value;
-            let errorId = 'new-board-error';
+            const boardTitle = document.getElementById('new-board-title').value;
+            const errorId = 'new-board-error';
 
-            let boardData = {
+            const boardData = {
                 title: boardTitle.trim(),
                 user_id: 1,
                 is_public: true
             };
-            let url = '/board';
+            const url = '/board';
 
             if(dom.checkEmptyTitle(boardTitle, errorId)){
                 fetch(url, {
                     method: 'POST',
-                    body: JSON.stringify(boardData), // data can be `string` or {object}!
+                    body: JSON.stringify(boardData),
                     headers: {
                         'Content-Type': 'application/json'
                     }
@@ -61,10 +62,7 @@ export let dataHandler = {
                     if (response.ok) {
                         // hide modal
                         dom.closeNewBoardModal();
-                        console.log("New Board created!");
                     }
-                }).catch(function (error) {
-                    console.log('There has been a problem with your fetch operation: ', error.message);
                 });
             }
         },
