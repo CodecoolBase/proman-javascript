@@ -3,8 +3,8 @@ let dom = {
     loadBoards: function () {
         // retrieves boards and makes showBoards called
         fetch('/get-boards')
-        .then((response) => response.json())
-        .then((response) => this.showBoards(response))
+            .then((response) => response.json())
+            .then((response) => this.showBoards(response))
     },
     showBoards: function (boards) {
         // shows boards appending them to #boards div
@@ -12,14 +12,18 @@ let dom = {
         for (const board of boards) {
             const boardToAdd = this.createBoardElement(board.title, board.id);
             document.querySelector('#boards').appendChild(boardToAdd);
-            this.loadCards(board.id)
+
+            const addNewCardToBoardButton = document.querySelectorAll('.new-card-button')[(board.id-1)];
+            addNewCardToBoardButton.dataset.boardId = board.id;
+            addNewCardToBoardButton.addEventListener('click', this.addNewCard);
+            this.loadCards(board.id);
         }
     },
     loadCards: function (boardId) {
         // retrieves cards and makes showCards called
         fetch('/get-cards/' + boardId)
-        .then((response) => response.json())
-        .then((response) => this.showCards(response, boardId))
+            .then((response) => response.json())
+            .then((response) => this.showCards(response, boardId))
     },
     showCards: function (cards, boardId) {
         // shows the cards of a board
@@ -31,25 +35,12 @@ let dom = {
             for (const column of allColumns) {
                 if (card.status == column.dataset.status) {
                     const cardToAdd = this.createCardElement(card.title);
-                    column.appendChild(cardToAdd)
+                    column.appendChild(cardToAdd);
+                    cardToAdd.dataset.cardId = card.id;
+                    cardToAdd.addEventListener('click', dom.openCurrentCard);
                 }
             }
         }
-    },
-    appendToElement: function (elementToExtend, textToAppend, prepend = false) {
-        // function to append new DOM elements (represented by a string) to an existing DOM element
-        let fakeDiv = document.createElement('div');
-        fakeDiv.innerHTML = textToAppend.trim();
-
-        for (childNode of fakeDiv.childNodes) {
-            if (prepend) {
-                elementToExtend.prependChild(childNode);
-            } else {
-                elementToExtend.appendChild(childNode);
-            }
-        }
-
-        return elementToExtend.lastChild;
     },
     // here comes more features
     createBoardElement: function (boardTitle, boardID) {
@@ -75,6 +66,15 @@ let dom = {
                     </tr>
                 </table>`;
         return board
+    },
+    addNewCard: function () {
+        const boardId = event.target.dataset.boardId;
+        const board = document.querySelector(`.board[data-id="${boardId}"]`);
+        const newCard = dom.createCardElement('New card title');
+        newCard.addEventListener('click', dom.openCurrentCard);
+        let allColumns = board.querySelectorAll('td');
+        allColumns[0].appendChild(newCard);
+        //    TODO gomb megnyomáskor is legyen modal
     },
     createCardElement: function (title) {
         let card = document.createElement('div');
@@ -150,17 +150,6 @@ let dom = {
         cardTitle.addEventListener('click', dom.renameCardTitle);
         addEventListener('keydown', dom.actionWhenButtonIsPressed);
         cardModal.addEventListener('click', dom.cardModalClickEventHandlers);
-    },
-    addNewCard: function () {
-        const board = document.getElementById('board-one');
-        const newCard = document.createElement('div');
-        const newCardTitle = document.createElement('p');
-        newCardTitle.innerHTML = 'New card title here';
-        newCardTitle.addEventListener('click', dom.openCurrentCard);
-        newCard.appendChild(newCardTitle);
-        newCard.classList.add('card-design');
-        board.appendChild(newCard);
-    //    TODO gomb megnyomáskor is legyen modal
     },
     actionWhenButtonIsPressed: function (event) {
         const currentCardTitle = document.getElementById('card-title');
