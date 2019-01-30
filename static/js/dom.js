@@ -116,7 +116,7 @@ let dom = {
         }
     },
     cardModalClickEventHandlers: function (event) {
-        const currentCardTitle = document.querySelector('#card-title');
+        const currentCardTitle = document.getElementById('card-title');
         const oldTitle = currentCardTitle.dataset.oldtitle;
         const saveButton = document.getElementById('save-button');
         const renameField = document.getElementById('new-title');
