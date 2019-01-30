@@ -60,7 +60,7 @@ export let dataHandler = {
                     }
                 }).then(function (response) {
                     if (response.ok) {
-                        // hide modal
+                        dom.loadBoards(true);
                         dom.closeNewBoardModal();
                     }
                 });

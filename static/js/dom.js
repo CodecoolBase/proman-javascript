@@ -2,11 +2,11 @@
 import {dataHandler} from "./data_handler.js";
 
 export let dom = {
-    loadBoards: function () {
+    loadBoards: function (last = false) {
         // retrieves boards and makes showBoards called
         fetch('/get-boards')
         .then((response) => response.json())
-        .then((response) => this.showBoards(response))
+        .then((response) => this.showBoards(last ? [response[response.length-1]] : response))
     },
     showBoards: function (boards) {
         // shows boards appending them to #boards div
