@@ -63,7 +63,9 @@ let dom = {
         renameInputField.setAttribute("value", oldTitle);
         currentCardTitle.appendChild(renameInputField);
         currentCardTitle.removeEventListener('click', dom.renameCardTitle);
+        let inputLength = renameInputField.value.length;
         renameInputField.focus();
+        renameInputField.setSelectionRange(inputLength, inputLength);
     },
     addNewTitleSaveButton: function (currentCardContainer) {
         const saveTitleButton = document.createElement('i');
@@ -119,10 +121,10 @@ let dom = {
         const currentCardTitle = document.getElementById('card-title');
         const oldTitle = currentCardTitle.dataset.oldtitle;
         const saveButton = document.getElementById('save-button');
-        const renameField = document.getElementById('new-title');
+        const renameInputField = document.getElementById('new-title');
 
-        if (event.target != currentCardTitle && saveButton != null) {
-            dom.restoreCardModal(currentCardTitle, renameField, oldTitle, saveButton);
+        if (event.target !== currentCardTitle && saveButton != null) {
+            dom.restoreCardModal(currentCardTitle, renameInputField, oldTitle, saveButton);
         }
     }
 };
