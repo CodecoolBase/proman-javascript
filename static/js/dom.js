@@ -92,6 +92,7 @@ let dom = {
         cardModal.style.display = 'block';
         cardTitle.addEventListener('click', dom.renameCardTitle);
         addEventListener('keydown', dom.actionWhenButtonIsPressed);
+        cardModal.addEventListener('click', dom.cardModalClickEventHandlers);
     },
     addNewCard: function () {
         const board = document.getElementById('board-one');
@@ -112,6 +113,16 @@ let dom = {
             dom.restoreCardModal(currentCardTitle, renameField, oldTitle, saveButton);
         } else if (event.keyCode === 13 && saveButton != null) {
             dom.saveNewTitle();
+        }
+    },
+    cardModalClickEventHandlers: function (event) {
+        const currentCardTitle = document.querySelector('#card-title');
+        const oldTitle = currentCardTitle.dataset.oldtitle;
+        const saveButton = document.getElementById('save-button');
+        const renameField = document.getElementById('new-title');
+
+        if (event.target != currentCardTitle && saveButton != null) {
+            dom.restoreCardModal(currentCardTitle, renameField, oldTitle, saveButton);
         }
     }
 };
