@@ -91,8 +91,13 @@ export let dom = {
             errorElement.innerHTML = "Please input a title.";
             return false;
         }
-
         return true;
+
+    },
+    checkBoardErrorMessage: function(){
+        const errorElement = document.getElementById('new-board-error');
+        errorElement.innerHTML = "";
+
     },
     assignNewBoardEventListeners: function(){
         const newBoardModalOpen = document.getElementById('new-board-button');
@@ -104,11 +109,17 @@ export let dom = {
         const newBoard = document.getElementById('new-board-save');
         newBoard.addEventListener('click', dataHandler.createNewBoard);
 
+        const newBoardTitle = document.getElementById('new-board-title');
+        newBoardTitle.addEventListener('keyup', dom.checkBoardErrorMessage)
+
     },
     openNewBoardModal: function(){
         const modal = document.getElementById('new-board-modal');
-
         modal.style.display = 'block';
+        const newBoardTitle = document.getElementById('new-board-title');
+        newBoardTitle.onfocus = function(){
+            newBoardTitle.value = "";
+        }
     },
     closeNewBoardModal: function(){
         const modal = document.getElementById('new-board-modal');
