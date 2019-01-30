@@ -38,8 +38,32 @@ let dataHandler = {
     createNewBoard: function (boardTitle, callback) {
         // creates new board, saves it and calls the callback function with its data
     },
-    createNewCard: function (cardTitle, boardId, statusId, callback) {
-        // creates new card, saves it and calls the callback function with its data
+    createNewCard: function (cardTitle, boardId, orderNum) {
+        const errorId = 'new-board-error';
+
+        const cardData = {
+            title: cardTitle.trim(),
+            board_id: boardId,
+            status_id: 1,
+            order_num: orderNum,
+            is_archived: false
+        };
+        const url = '/card';
+
+        if (dom.checkEmptyTitle(cardTitle, errorId)) {
+            fetch(url, {
+                method: 'POST',
+                body: JSON.stringify(cardData),
+                headers: {
+                    'Content-Type': 'application/json'
+                }
+            }).then(function (response) {
+                if (response.ok) {
+                    dom.loadBoards(true);
+                    // dom.closeNewBoardModal();
+                }
+            });
+        }
     }
     // here comes more features
 };
