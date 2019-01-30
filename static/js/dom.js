@@ -145,6 +145,9 @@ let dom = {
         if (event.target !== currentCardTitle && saveButton != null) {
             dom.restoreCardModalAndShowTitleOnly(currentCardTitle, renameInputField, oldTitle, saveButton);
         }
+        if (event.target == renameInputField) {
+            dom.renameCardTitle();
+        }
     },
     restoreCardModalAndShowTitleOnly: function (currentCardTitle, renameInputField, newTitle, saveButton) {
         currentCardTitle.innerHTML = newTitle;
