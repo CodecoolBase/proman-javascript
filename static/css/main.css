@@ -80,6 +80,8 @@
 .card-title-design {
     font-size: 2.5vw;
     font-weight: bold;
+    display: inline-block;
+    border: 1px solid black;
 }
 
 .fa-save {
