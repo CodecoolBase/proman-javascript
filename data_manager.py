@@ -8,6 +8,7 @@ def get_cards_for_board(cursor, board_id):
                     FROM cards
                     JOIN statuses ON cards.status_id = statuses.id
                     WHERE cards.board_id = %(board_id)s
+                    ORDER BY cards.order_num ASC;
                     """,
                    {'board_id': board_id})
 
