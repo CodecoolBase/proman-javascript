@@ -30,14 +30,15 @@ let dom = {
         return elementToExtend.lastChild;
     },
     closeCard: function () {
-        const currentCard = document.getElementById('card-container');
+        const modal = document.getElementById('card-container');
+        // TODo modalnak elég lenne a card-modal content??
         const cardTitle = document.getElementById('card-title');
-        const saveButton = document.getElementById("save-button");
+        const saveButton = document.getElementById('save-button');
         if (saveButton != null) {
             saveButton.remove();
         }
-        cardTitle.innerHTML = "";
-        currentCard.style.display = 'none';
+        cardTitle.innerHTML = "";   //TODO kell ez, ha adatbázisbl hívja az adatot?
+        modal.style.display = 'none';
     },
     saveNewTitle: function () {
         const currentCardTitle = document.getElementById('card-title');
@@ -53,7 +54,7 @@ let dom = {
         renameField.remove();
         saveButton.remove();
 
-        // adatbázisba kimentés, restoreWhenEscIsPressed-nél is enterre!!
+        // TODO adatbázisba kimentés, restoreWhenEscIsPressed-nél is enterre!!
         currentCardTitle.addEventListener('click', dom.renameCardTitle);
     },
     addRenameInputField: function (currentCardTitle, oldTitle) {
@@ -105,6 +106,7 @@ let dom = {
         newCard.appendChild(newCardTitle);
         newCard.classList.add('card-design');
         board.appendChild(newCard);
+    //    TODO gomb megnyomáskor is legyen modal
     },
     actionWhenButtonIsPressed: function (event) {
         const currentCardTitle = document.getElementById('card-title');
