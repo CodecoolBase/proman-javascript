@@ -61,6 +61,7 @@ body {
     box-shadow: 0 0 9px 0px, inset 0 0 46px;
     border-top-left-radius: 10px;
     border-top-right-radius: 10px;
+    position: relative;
 }
 
 .darker {
@@ -69,9 +70,9 @@ body {
 
 th {
     font-family: monospace !important;
-    height: 50px;
+    height: 40px;
     text-align: center;
-    font-size: 1.5rem !important;
+    font-size: 1.5rem;
 }
 
 th, td {
@@ -87,7 +88,10 @@ td {
     height: 200px;
     background-color: #EDEDED;
     box-shadow: 0 0 10px 0px;
-    table-layout: fixed
+    table-layout: fixed;
+    position: relative;
+    transition: all 1s ease-in-out;
+    z-index: -1;
 }
 
 .board {
@@ -119,4 +123,35 @@ td {
     padding: 5px;
     border-radius: 5px;
     margin: 6px;
+}
+
+.board-opener-closer {
+    font-size: 1.5em;
+    float: right;
+    transform: translate(-50%, -20%) rotate(0deg);
+    transition: all 1s ease-in-out;
+    cursor: pointer;
+    height: 0;
+    margin-top: -13px;
+    opacity: 0.6;
+    transition-duration: 1s;
+}
+
+.hide-table {
+    opacity: 0;
+    height: 0;
+    font-size: 0 rem;
+    transition: height 1s ease-in-out, font-size 1s linear, opacity 0.1s ease-in-out;
+}
+
+table {
+    transition-duration: 1s;
+    transition-timing-function: ease-in-out;
+}
+
+.half-rotate {
+    margin-top: 49px;
+    transform: translate(-50%, 90%) rotate(180deg);
+    transition: all 0.5s ease-in-out;
+    transition-duration: 1s;
 }

@@ -58,7 +58,7 @@ let dom = {
         board.dataset.id = boardID;
         board.innerHTML = `
                 <div class="board-header">
-                    <h2>${boardTitle}<button class="new-card-button">+ New Card</button></h2>
+                    <h2>${boardTitle}<button class="new-card-button">+ New Card</button><i class="fas fa-caret-down board-opener-closer half-rotate"></i></h2>
                 </div>
                 <table class="board-body">
                     <tr>
@@ -74,6 +74,8 @@ let dom = {
                         <td data-status=4 class="darker"></td>
                     </tr>
                 </table>`;
+        board.querySelector('.board-opener-closer').addEventListener('click', () => {this.openCloseBoard(board)});
+
         return board
     },
     createCardElement: function (title) {
@@ -82,5 +84,17 @@ let dom = {
         card.innerText = title;
 
         return card
+    },
+    openCloseBoard: function (boardElement) {
+        const table = boardElement.querySelector('table');
+        if (table.classList.contains('hide-table')) {
+            table.classList.remove('hide-table');
+            boardElement.style.height = '';
+            event.target.classList.add('half-rotate')
+        } else {
+            table.classList.add('hide-table');
+            boardElement.style.height = '95px';
+            event.target.classList.remove('half-rotate')
+        }
     }
 };
