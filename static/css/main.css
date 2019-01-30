@@ -11,19 +11,19 @@
 
 #new-board-button {
     float: right;
-    transform: translate(0,58%);
+    transform: translate(0, 58%);
     user-select: none;
 }
 
 .new-card-button {
-    transform: translate(0,-19%);
+    transform: translate(0, -19%);
     user-select: none;
     margin-left: 20px;
 
 }
 
 #new-board-button:hover, .new-card-button:hover, .text-button:hover {
-    color:white;
+    color: white;
     background-color: #454545;
     transition-duration: 0.2s;
     cursor: pointer;
@@ -151,6 +151,8 @@ td {
     top: 20vh;
     box-shadow: 0px 0px 15vw 0vw black;
     font-family: fantasy;
+    background-image: url("/static/background.jpg");
+
 }
 
 .card-container {
@@ -171,6 +173,7 @@ td {
     font-size: 2.5vw;
     font-weight: bold;
     display: inline-block;
+    color: black;
 }
 
 #save-title-button {
@@ -191,8 +194,7 @@ input {
     font-size: 2.4vw;
     text-align: center;
     font-weight: bold;
-    border: 0;
-    border-bottom: 1px dashed black;
+    border: 1px dashed black;
     outline: none;
     display: inline-block;
     margin: 0 4vh;
@@ -200,7 +202,11 @@ input {
 
 input::selection {
     color: black;
-    background-color: rgba(0, 0, 0, 0.3);
+    background-color: #fff;
+}
+
+input[type="text"] {
+    background-color: #b9b5b5;
 }
 
 .my-skull-close-icon {
