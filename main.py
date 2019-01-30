@@ -1,4 +1,4 @@
-from flask import Flask, render_template, jsonify
+from flask import Flask, render_template, jsonify, request
 import data_manager
 
 app = Flask(__name__)
@@ -18,6 +18,20 @@ def get_boards():
 @app.route('/get-cards/<board_id>')
 def get_cards(board_id):
     return jsonify(data_manager.get_cards_for_board(board_id))
+
+
+@app.route('/card/new-card', methods=['POST'])
+def save_new_card_data():
+    new_card_data = request.get_json()
+    data_manager.insert_new_card(new_card_data)
+    return jsonify("New card is saved!")
+
+
+@app.route('/card/new-title', methods=['POST'])
+def save_new_card_title():
+    new_card_title_data = request.get_json()
+    data_manager.save_new_card_title(new_card_title_data)
+    return jsonify("New card title is saved!")
 
 
 def main():
