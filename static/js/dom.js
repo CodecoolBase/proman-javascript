@@ -13,10 +13,10 @@ let dom = {
             const boardToAdd = this.createBoardElement(board.title, board.id);
             document.querySelector('#boards').appendChild(boardToAdd);
 
+            this.loadCards(board.id);
             const addNewCardToBoardButton = document.querySelectorAll('.new-card-button')[(board.id - 1)];
             addNewCardToBoardButton.dataset.boardId = board.id;
             addNewCardToBoardButton.addEventListener('click', this.addNewCard);
-            this.loadCards(board.id);
         }
     },
     loadCards: function (boardId) {
@@ -71,7 +71,7 @@ let dom = {
         const boardId = parseInt(event.target.dataset.boardId);
         const board = document.querySelector(`.board[data-id="${boardId}"]`);
 
-        const cardTitle = 'New card title';    //TODO ez jöjjön majd modalból -> majd
+        const cardTitle = 'New task';    //TODO ez jöjjön majd modalból -> majd
         const newCard = dom.createCardElement(cardTitle);
         newCard.addEventListener('click', dom.openCurrentCard);
 
@@ -79,14 +79,6 @@ let dom = {
         allColumn[0].appendChild(newCard);
         const orderNum = allColumn[0].childNodes.length;
         dataHandler.createNewCard(cardTitle, boardId, orderNum);
-    },
-    emptyBoard: function (boardId) {
-        const board = document.querySelector(`.board[data-id="${boardId}"]`);
-        const allColumn = board.querySelectorAll('td');
-
-        for (let i=0; i < allColumn.length; i++) {
-            allColumn[i].innerHTML = "";
-        }
     },
     createCardElement: function (title) {
         let card = document.createElement('div');
@@ -97,37 +89,40 @@ let dom = {
     },
     openCurrentCard: function () {
         const currentCardId = event.target.dataset.cardId;
+        const currentCardTitle = event.target.childNodes[0].nodeValue;
         const modal = document.getElementById('card-container');
         modal.dataset.cardId = currentCardId;
 
-        const currentCardTitle = event.target.childNodes[0].nodeValue;
         const cardTitle = document.getElementById('card-title');
-
         cardTitle.innerHTML = currentCardTitle;
         modal.style.display = 'block';
+
         cardTitle.addEventListener('click', dom.renameCardTitle);
-        addEventListener('keydown', dom.actionWhenButtonIsPressed);
-        modal.addEventListener('click', dom.cardModalClickEventHandlers);
+        modal.addEventListener('keydown', dom.cardModalButtonPressEvents);
+        modal.addEventListener('click', dom.cardModalClickEvents);
     },
     renameCardTitle: function () {
+        const currentCardTitleContainer = document.getElementById('card-data-container');
         const currentCardTitle = document.getElementById('card-title');
-        const currentCardContainer = document.getElementById('card-data-container');
         const oldTitle = currentCardTitle.innerHTML;
+
         currentCardTitle.dataset.oldtitle = oldTitle;
         currentCardTitle.innerHTML = "";
 
-        dom.addRenameInputField(currentCardTitle, oldTitle);
-        dom.addNewTitleSaveButton(currentCardContainer);
+        dom.addRenameInputField(currentCardTitle, oldTitle, currentCardTitleContainer);
+        dom.addNewTitleSaveButton(currentCardTitleContainer);
     },
-    addRenameInputField: function (currentCardTitle, oldTitle) {
+    addRenameInputField: function (currentCardTitle, oldTitle, currentCardTitleContainer) {
         const renameInputField = document.createElement("input");
         renameInputField.id = "new-title";
         renameInputField.setAttribute("type", "text");
         renameInputField.setAttribute("value", oldTitle);
-        currentCardTitle.appendChild(renameInputField);
+
+        currentCardTitleContainer.appendChild(renameInputField);
         currentCardTitle.removeEventListener('click', dom.renameCardTitle);
-        let inputLength = renameInputField.value.length;
+
         renameInputField.focus();
+        const inputLength = renameInputField.value.length;
         renameInputField.setSelectionRange(inputLength, inputLength);
     },
     addNewTitleSaveButton: function (currentCardContainer) {
@@ -135,21 +130,23 @@ let dom = {
         saveTitleButton.id = "save-button";
         saveTitleButton.classList.add('far');
         saveTitleButton.classList.add('fa-save');
+
         saveTitleButton.title = "Save title";
         saveTitleButton.addEventListener('click', dom.saveNewTitle);
+
         currentCardContainer.appendChild(saveTitleButton);
     },
-    cardModalClickEventHandlers: function (event) {
+    cardModalClickEvents: function (event) {
         const currentCardTitle = document.getElementById('card-title');
         const oldTitle = currentCardTitle.dataset.oldtitle;
         const saveButton = document.getElementById('save-button');
         const renameInputField = document.getElementById('new-title');
 
         if (event.target !== currentCardTitle && saveButton != null) {
-            dom.restoreCardModalBeforeEdit(currentCardTitle, renameInputField, oldTitle, saveButton);
+            dom.restoreCardModalAndShowTitleOnly(currentCardTitle, renameInputField, oldTitle, saveButton);
         }
     },
-    restoreCardModalBeforeEdit: function (currentCardTitle, renameField, newTitle, saveButton) {
+    restoreCardModalAndShowTitleOnly: function (currentCardTitle, renameField, newTitle, saveButton) {
         currentCardTitle.innerHTML = newTitle;
         currentCardTitle.dataset.oldtitle = newTitle;
         renameField.remove();
@@ -166,26 +163,22 @@ let dom = {
         const currentCardId = parseInt(modal.dataset.cardId);
 
         dataHandler.saveNewCardTitle(currentCardId, newTitle);
-        dom.restoreCardModalBeforeEdit(currentCardTitle, renameField, newTitle, saveButton);
-
-        dom.updateCardTitleInColumn(newTitle, currentCardId);
+        dom.restoreCardModalAndShowTitleOnly(currentCardTitle, renameField, newTitle, saveButton);
+        dom.updateCardTitleInBoard(newTitle, currentCardId);
     },
-    updateCardTitleInColumn: function (newTitle, currentCardId) {
+    updateCardTitleInBoard: function (newTitle, currentCardId) {
         const currentCard = document.querySelector(`.my-card[data-card-id="${currentCardId}"]`);
         currentCard.innerHTML = newTitle;
     },
     closeCard: function () {
         const modal = document.getElementById('card-container');
-        // TODO modalnak elég lenne a card-modal content??
-        const cardTitle = document.getElementById('card-title');
         const saveButton = document.getElementById('save-button');
         if (saveButton != null) {
             saveButton.remove();
         }
-        cardTitle.innerHTML = "";   //TODO kell ez, ha adatbázisból hívja az adatot?
         modal.style.display = 'none';
     },
-    actionWhenButtonIsPressed: function (event) {
+    cardModalButtonPressEvents: function (event) {
         const currentCardTitle = document.getElementById('card-title');
         const oldTitle = currentCardTitle.dataset.oldtitle;
         const saveButton = document.getElementById('save-button');
@@ -193,10 +186,11 @@ let dom = {
 
         const escButton = 27;
         const enterButton = 13;
+        const pressedButton = event.keyCode;
 
-        if (event.keyCode === escButton && saveButton != null) {
-            dom.restoreCardModalBeforeEdit(currentCardTitle, renameField, oldTitle, saveButton);
-        } else if (event.keyCode === enterButton && saveButton != null) {
+        if (pressedButton=== escButton && saveButton != null) {
+            dom.restoreCardModalAndShowTitleOnly(currentCardTitle, renameField, oldTitle, saveButton);
+        } else if (pressedButton === enterButton && saveButton != null) {
             dom.saveNewTitle();
         }
     },
@@ -207,5 +201,13 @@ let dom = {
             return false;
         }
         return true;
+    },
+    emptyBoard: function (boardId) {
+        const board = document.querySelector(`.board[data-id="${boardId}"]`);
+        const allColumn = board.querySelectorAll('td');
+
+        for (let i=0; i < allColumn.length; i++) {
+            allColumn[i].innerHTML = "";
+        }
     }
 };
