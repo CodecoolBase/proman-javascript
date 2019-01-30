@@ -204,6 +204,7 @@ td {
     margin: 0.5vw;
     padding-top: 10px;
     font-size: 2.5vw;
+    display: block;
 }
 
 input {
