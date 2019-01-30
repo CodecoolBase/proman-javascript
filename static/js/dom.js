@@ -146,10 +146,10 @@ let dom = {
             dom.restoreCardModalAndShowTitleOnly(currentCardTitle, renameInputField, oldTitle, saveButton);
         }
     },
-    restoreCardModalAndShowTitleOnly: function (currentCardTitle, renameField, newTitle, saveButton) {
+    restoreCardModalAndShowTitleOnly: function (currentCardTitle, renameInputField, newTitle, saveButton) {
         currentCardTitle.innerHTML = newTitle;
         currentCardTitle.dataset.oldtitle = newTitle;
-        renameField.remove();
+        renameInputField.remove();
         saveButton.remove();
         currentCardTitle.addEventListener('click', dom.renameCardTitle);
     },
@@ -182,16 +182,18 @@ let dom = {
         const currentCardTitle = document.getElementById('card-title');
         const oldTitle = currentCardTitle.dataset.oldtitle;
         const saveButton = document.getElementById('save-button');
-        const renameField = document.getElementById('new-title');
+        const renameInputField = document.getElementById('new-title');
 
         const escButton = 27;
         const enterButton = 13;
         const pressedButton = event.keyCode;
 
-        if (pressedButton=== escButton && saveButton != null) {
-            dom.restoreCardModalAndShowTitleOnly(currentCardTitle, renameField, oldTitle, saveButton);
+        if (pressedButton === escButton && saveButton != null) {
+            dom.restoreCardModalAndShowTitleOnly(currentCardTitle, renameInputField, oldTitle, saveButton);
         } else if (pressedButton === enterButton && saveButton != null) {
             dom.saveNewTitle();
+            const inputLength = renameInputField.value.length;
+            renameInputField.setSelectionRange(inputLength, inputLength);
         }
     },
     checkEmptyTitle: function (title, errorId) {
@@ -206,7 +208,7 @@ let dom = {
         const board = document.querySelector(`.board[data-id="${boardId}"]`);
         const allColumn = board.querySelectorAll('td');
 
-        for (let i=0; i < allColumn.length; i++) {
+        for (let i = 0; i < allColumn.length; i++) {
             allColumn[i].innerHTML = "";
         }
     }
