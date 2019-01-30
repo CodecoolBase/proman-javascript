@@ -71,14 +71,22 @@ let dom = {
         const boardId = parseInt(event.target.dataset.boardId);
         const board = document.querySelector(`.board[data-id="${boardId}"]`);
 
-        const cardTitle = 'New card title';    //TODO ez jöjjön majd modalból ->
+        const cardTitle = 'New card title';    //TODO ez jöjjön majd modalból -> majd
         const newCard = dom.createCardElement(cardTitle);
         newCard.addEventListener('click', dom.openCurrentCard);
 
-        const allColumns = board.querySelectorAll('td');
-        allColumns[0].appendChild(newCard);
-        const orderNum = allColumns[0].childNodes.length;
-        // dataHandler.createNewCard(cardTitle, boardId, orderNum);
+        const allColumn = board.querySelectorAll('td');
+        allColumn[0].appendChild(newCard);
+        const orderNum = allColumn[0].childNodes.length;
+        dataHandler.createNewCard(cardTitle, boardId, orderNum);
+    },
+    emptyBoard: function (boardId) {
+        const board = document.querySelector(`.board[data-id="${boardId}"]`);
+        const allColumn = board.querySelectorAll('td');
+
+        for (let i=0; i < allColumn.length; i++) {
+            allColumn[i].innerHTML = "";
+        }
     },
     createCardElement: function (title) {
         let card = document.createElement('div');
@@ -88,14 +96,18 @@ let dom = {
         return card
     },
     openCurrentCard: function () {
+        const currentCardId = event.target.dataset.cardId;
+        const modal = document.getElementById('card-container');
+        modal.dataset.cardId = currentCardId;
+
         const currentCardTitle = event.target.childNodes[0].nodeValue;
-        const cardModal = document.getElementById('card-container');
         const cardTitle = document.getElementById('card-title');
+
         cardTitle.innerHTML = currentCardTitle;
-        cardModal.style.display = 'block';
+        modal.style.display = 'block';
         cardTitle.addEventListener('click', dom.renameCardTitle);
         addEventListener('keydown', dom.actionWhenButtonIsPressed);
-        cardModal.addEventListener('click', dom.cardModalClickEventHandlers);
+        modal.addEventListener('click', dom.cardModalClickEventHandlers);
     },
     renameCardTitle: function () {
         const currentCardTitle = document.getElementById('card-title');
@@ -149,18 +161,22 @@ let dom = {
         const newTitle = document.getElementById('new-title').value;
         const renameField = document.getElementById("new-title");
         const saveButton = document.getElementById("save-button");
-        // TODO adatbázisba kimentés, restoreWhenEscIsPressed-nél is enterre!!
 
-        dom.restoreCardModalBeforeEdit(currentCardTitle, renameField, newTitle, saveButton)
+        const modal = document.getElementById('card-container');
+        const currentCardId = parseInt(modal.dataset.cardId);
+
+        dataHandler.saveNewCardTitle(currentCardId, newTitle);
+        dom.restoreCardModalBeforeEdit(currentCardTitle, renameField, newTitle, saveButton);
+
+        dom.updateCardTitleInColumn(newTitle, currentCardId);
     },
-    clearCards: function (board) {
-        const firstColumn = board.querySelectorAll('td')[0];
-        console.log(firstColumn.innerHTML);
-        // firstColumn.innerHTML = "";
+    updateCardTitleInColumn: function (newTitle, currentCardId) {
+        const currentCard = document.querySelector(`.my-card[data-card-id="${currentCardId}"]`);
+        currentCard.innerHTML = newTitle;
     },
     closeCard: function () {
         const modal = document.getElementById('card-container');
-        // TODo modalnak elég lenne a card-modal content??
+        // TODO modalnak elég lenne a card-modal content??
         const cardTitle = document.getElementById('card-title');
         const saveButton = document.getElementById('save-button');
         if (saveButton != null) {
