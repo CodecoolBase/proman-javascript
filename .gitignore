@@ -20,6 +20,10 @@ lib64/
 parts/
 sdist/
 var/
+<<<<<<< HEAD
+=======
+wheels/
+>>>>>>> 45ef333e51ea1383c23f70d83bbc100c31400ea8
 *.egg-info/
 .installed.cfg
 *.egg
@@ -42,7 +46,11 @@ htmlcov/
 .cache
 nosetests.xml
 coverage.xml
+<<<<<<< HEAD
 *,cover
+=======
+*.cover
+>>>>>>> 45ef333e51ea1383c23f70d83bbc100c31400ea8
 .hypothesis/
 
 # Translations
@@ -66,7 +74,11 @@ docs/_build/
 # PyBuilder
 target/
 
+<<<<<<< HEAD
 # IPython Notebook
+=======
+# Jupyter Notebook
+>>>>>>> 45ef333e51ea1383c23f70d83bbc100c31400ea8
 .ipynb_checkpoints
 
 # pyenv
@@ -75,19 +87,39 @@ target/
 # celery beat schedule file
 celerybeat-schedule
 
+<<<<<<< HEAD
+=======
+# SageMath parsed files
+*.sage.py
+
+>>>>>>> 45ef333e51ea1383c23f70d83bbc100c31400ea8
 # dotenv
 .env
 
 # virtualenv
+<<<<<<< HEAD
 venv/
 ENV/
 
 # Spyder project settings
 .spyderproject
+=======
+.venv
+venv/
+ENV/
+
+# PyCharm
+.idea/
+
+# Spyder project settings
+.spyderproject
+.spyproject
+>>>>>>> 45ef333e51ea1383c23f70d83bbc100c31400ea8
 
 # Rope project settings
 .ropeproject
 
+<<<<<<< HEAD
 # Covers JetBrains IDEs: IntelliJ, RubyMine, PhpStorm, AppCode, PyCharm, CLion, Android Studio and Webstorm
 # Reference: https://intellij-support.jetbrains.com/hc/en-us/articles/206544839
 
@@ -132,3 +164,13 @@ com_crashlytics_export_strings.xml
 crashlytics.properties
 crashlytics-build.properties
 fabric.properties
+=======
+# mkdocs documentation
+/site
+
+# mypy
+.mypy_cache/
+
+
+todo.txt
+>>>>>>> 45ef333e51ea1383c23f70d83bbc100c31400ea8
