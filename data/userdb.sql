@@ -90,10 +90,10 @@ INSERT INTO boards VALUES (2, 'Test Board 2', true, 1, true);
 SELECT pg_catalog.setval('boards_id_seq', 3, true);
 
 
-INSERT INTO cards VALUES (1, 'task1', 1, 1, 3, false);
-INSERT INTO cards VALUES (2, 'task1', 1, 2, 2, false);
+INSERT INTO cards VALUES (1, 'task1', 1, 1, 1, false);
+INSERT INTO cards VALUES (2, 'task1', 1, 2, 1, false);
 INSERT INTO cards VALUES (3, 'task1', 1, 4, 1, false);
-INSERT INTO cards VALUES (4, 'task1', 2, 1, 3, false);
-INSERT INTO cards VALUES (5, 'task1', 2, 2, 2, false);
+INSERT INTO cards VALUES (4, 'task1', 2, 1, 1, false);
+INSERT INTO cards VALUES (5, 'task1', 2, 2, 1, false);
 INSERT INTO cards VALUES (6, 'task1', 2, 3, 1, false);
 SELECT pg_catalog.setval('cards_id_seq', 7, true);
