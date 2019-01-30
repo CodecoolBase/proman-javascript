@@ -48,9 +48,10 @@ let dom = {
 
     },
     restoreCardModal: function (currentCardTitle, renameField, newTitle, saveButton) {
+        currentCardTitle.innerHTML = newTitle;
+        currentCardTitle.dataset.oldtitle = newTitle;
         renameField.remove();
         saveButton.remove();
-        currentCardTitle.innerHTML = newTitle;
 
         // adatbázisba kimentés, restoreWhenEscIsPressed-nél is enterre!!
         currentCardTitle.addEventListener('click', dom.renameCardTitle);
