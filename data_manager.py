@@ -19,6 +19,7 @@ def get_boards_infos(cursor):
     cursor.execute("""
         SELECT id, title, user_id, is_public
         FROM boards
+        ORDER BY id ASC;
         """)
 
     return cursor.fetchall()
@@ -29,7 +30,7 @@ def insert_new_card(cursor, new_card_data):
     cursor.execute("""
         INSERT INTO cards
         (title, board_id, status_id, order_num, is_archived)
-        VALUES (%(title)s, %(board_id)s, %(status_id)s, %(order_num)s, %(is_archived)s)
+        VALUES (%(title)s, %(board_id)s, %(status_id)s, %(order_num)s, %(is_archived)s);
         """, new_card_data)
 
 
