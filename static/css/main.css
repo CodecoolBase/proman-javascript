@@ -96,3 +96,8 @@ input {
     text-align: center;
     font-weight: bold;
 }
+
+input::selection {
+    color: black;
+    background-color: rgba(0, 0, 0, 0.3);
+}
