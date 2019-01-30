@@ -60,6 +60,7 @@ export let dataHandler = {
                     }
                 }).then(function (response) {
                     if (response.ok) {
+                        document.querySelector('#boards').innerHTML = "";
                         dom.loadBoards(true);
                         dom.closeNewBoardModal();
                     }
