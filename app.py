@@ -6,7 +6,7 @@ app = Flask(__name__)
 @app.route("/")
 def boards():
     """
-    this is a one-pager which shows all the boards and cards 
+    this is a one-pager which shows all the boards and cards
     """
     return render_template('boards.html')
 
