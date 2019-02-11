@@ -19,6 +19,7 @@ let dataHandler = {
     },
     getBoards: function (callback) {
         // the boards are retrieved and then the callback function is called with the boards
+
     },
     getBoard: function (boardId, callback) {
         // the board is retrieved and then the callback function is called with the board
@@ -40,6 +41,16 @@ let dataHandler = {
     },
     createNewCard: function (cardTitle, boardId, statusId, callback) {
         // creates new card, saves it and calls the callback function with its data
+    },
+    createNewElement: function (tagName, attributes) {
+        /*
+        param: tagName (string)
+        param: attributes(dictionary)
+        return: created element*/
+        //let newElement = document.createElement('button');
+
+
+        //return newElement
     }
     // here comes more features
 };
