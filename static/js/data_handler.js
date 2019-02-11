@@ -14,6 +14,7 @@ let dataHandler = {
     _saveData: function () {
         // it is not called from outside
         // saves the data from this._data to local storage
+        localStorage.setItem(keyInLocalStorage, JSON.stringify(this._data));
     },
     init: function () {
         this._loadData();
