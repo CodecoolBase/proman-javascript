@@ -9,6 +9,7 @@ let dataHandler = {
     _loadData: function () {
         // it is not called from outside
         // loads data from local storage, parses it and put into this._data property
+        this._data = JSON.parse(localStorage.getItem(keyInLocalStorage));
     },
     _saveData: function () {
         // it is not called from outside
