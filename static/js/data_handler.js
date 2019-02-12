@@ -50,18 +50,14 @@ let dataHandler = {
     },
     createNewBoard: function (boardTitle, callback) {
         // creates new board, saves it and calls the callback function with its data
-        let board = document.createElement(boardTitle);
-        board.classList.add("Board");
-        body.appendChild(board);
-        callback();
+        let boards = dataHandler._data("boards");
+        let newID = boards.length + 1;
+        let newBoard = {'id': newID, 'title': boardTitle, 'is_active': true};
+            boards.push(newBoard);
+        }
     },
     createNewCard: function (cardTitle, boardTitle, statusId, callback) {
         // creates new card, saves it and calls the callback function with its data
-        let NewCard = document.createElement("NewCard");
-        NewCard.classList.add(statusId);
-        NewCard.title = cardTitle;
-        document.getElementsByTagName(boardTitle).appendChild(NewCard);
-        callback();
     },
     // here comes more features
     createNewElement: function (tagName, attributes) {
