@@ -77,8 +77,11 @@ let dom = {
     makeButton: function (title, eventHandler) {
         let newButton = document.createElement('button');
         newButton.addEventListener('click', eventHandler);
-        newButton.value = title;
+        newButton.textContent = title;
         return newButton
-    }
+    },
+    makeBoardHeader: function (board) {
+
+    },
 };
 
