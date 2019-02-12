@@ -31,7 +31,7 @@ let sampleData = {
         {
             "id": 2,
             "title": "Test Board 2",
-            "is_active": true
+            "is_active": false
         },
         {
             "id": 3,
@@ -46,7 +46,7 @@ let sampleData = {
         {
             "id": 5,
             "title": "Test Board 5",
-            "is_active": true
+            "is_active": false
         }
     ],
     "cards": [
