@@ -50,8 +50,10 @@ let dom = {
     },
 
     makeBoard: function (board) {
-        //param: board: object containing board  details
-        //return: HTML object
+        /*
+        param: board: object containing board  details
+        return: HTML object
+         */
         let newBoard = document.createElement('div');
         newBoard.id = board['id'];
         newBoard.classList.add('board');
@@ -62,9 +64,21 @@ let dom = {
         boardTitle.textContent = board['title'];
         boardHeader.appendChild(boardTitle);
         //create "New Card" button and append it
+        let newCardButton = dom.makeButton("New Card", function(){
+            console.log('here should be function creating new card');
+        });
+        boardHeader.appendChild(newCardButton);
         //add event listener to toggle 'data-is-active' on click
-        //boardHeader.appendChild(boardTitle);
+        boardHeader.addEventListener('click', function(){
+            console.log('here should be function changing data-is-active attribute');
+        });
         return newBoard
+    },
+    makeButton: function (title, eventHandler) {
+        let newButton = document.createElement('button');
+        newButton.addEventListener('click', eventHandler);
+        newButton.value = title;
+        return newButton
     }
 };
 
