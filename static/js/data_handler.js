@@ -49,13 +49,17 @@ let dataHandler = {
             }
         }
     callback(cardsByBoard)
-
+      
     },
     getCard: function (cardId, callback) {
         // the card is retrieved and then the callback function is called with the card
     },
-    createNewBoard: function (boardTitle, callback) {
+    createNewBoard: function (boardTitle) {
         // creates new board, saves it and calls the callback function with its data
+        let boards = dataHandler._data.boards;
+        let newID = boards.length + 1;
+        let newBoard = {'id': newID, 'title': boardTitle, 'is_active': true};
+        boards.push(newBoard);
     },
     createNewCard: function (cardTitle, boardTitle, statusId, callback) {
         // creates new card, saves it and calls the callback function with its data
@@ -64,5 +68,4 @@ let dataHandler = {
         // creates new card, saves it and calls the callback function with its data
     },
     // here comes more features
-
 };
