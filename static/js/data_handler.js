@@ -25,15 +25,22 @@ let dataHandler = {
     },
     getBoard: function (boardId, callback) {
         // the board is retrieved and then the callback function is called with the board
+        let boards = getBoards();
+        for (i = 0 ;i < boards.length ; i++){
+            if(boardId == boards[i].id){
+                callback(boards[i])
+            }
+        }
+        callback()
     },
     getStatuses: function (callback) {
         // the statuses are retrieved and then the callback function is called with the statuses
-        let statuses = dataHandler._data["statuses"]
+        let statuses = dataHandler._data["statuses"];
         callback(statuses) 
     },
     getStatus: function (statusId, callback) {
         // the status is retrieved and then the callback function is called with the status
-        let statuses = getstatuses();
+        let statuses = getStatuses();
         for (i = 0 ;i < statuses.length ; i++){
             if(statusId == statuses[i].id){
                 callback(statuses[i])
@@ -59,7 +66,7 @@ let dataHandler = {
     createNewCard: function (cardTitle, boardTitle, statusId, callback) {
         // creates new card, saves it and calls the callback function with its data
         let NewCard = document.createElement("NewCard");
-        NewCard.classList.ad(statusId);
+        NewCard.classList.add(statusId);
         NewCard.title = cardTitle;
         document.getElementsByTagName(boardTitle).appendChild(NewCard);
         callback();
