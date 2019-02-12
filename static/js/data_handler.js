@@ -43,7 +43,7 @@ let dataHandler = {
         let board = document.createElement(boardTitle);
         board.classList.add("Board");
         body.appendChild(board);
-        //callbackfunction(callback);
+        callback();
     },
     createNewCard: function (cardTitle, boardTitle, statusId, callback) {
         // creates new card, saves it and calls the callback function with its data
@@ -51,7 +51,7 @@ let dataHandler = {
         NewCard.classList.add(statusId);
         NewCard.title = cardTitle;
         document.getElementsByTagName(boardTitle).appendChild(NewCard);
-        //callbackfunction(callback);
+        callback();
     },
     // here comes more features
     createNewElement: function (tagName, attributes) {
