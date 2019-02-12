@@ -57,9 +57,12 @@ let dom = {
         if (board['is_active']) {
             newBoard.setAttribute('is_active', 'true');
         }
-        let boardTitle = document.createElement('h2');
+        let boardHeader = document.createElement('div');
+        newBoard.appendChild(boardHeader);
+        let boardTitle = document.createElement('span');
         boardTitle.textContent = board['title'];
-        newBoard.appendChild(boardTitle);
+        boardHeader.appendChild(boardTitle);
+        //boardHeader.appendChild(boardTitle);
         return newBoard
     }
 };

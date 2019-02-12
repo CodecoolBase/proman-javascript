@@ -41,7 +41,15 @@ let dataHandler = {
     },
     getCardsByBoardId: function (boardId, callback) {
         // the cards are retrieved and then the callback function is called with the cards
-        let cards = dataHandler._data["cards"]
+        let cards = dataHandler._data["cards"];
+        let cardsByBoard = [];
+        for (i = 0 ;i < cards.length ; i++){
+            if(cards[i].board_id == boardId){
+                cardsByBoard.push(cards[i])
+            }
+        }
+    callback(cardsByBoard)
+      
     },
     getCard: function (cardId, callback) {
         // the card is retrieved and then the callback function is called with the card
@@ -56,15 +64,8 @@ let dataHandler = {
     createNewCard: function (cardTitle, boardTitle, statusId, callback) {
         // creates new card, saves it and calls the callback function with its data
     },
-    // here comes more features
-    createNewElement: function (tagName, attributes) {
-        /*
-        param: tagName (string)
-        param: attributes(dictionary)
-        return: created element*/
-        //let newElement = document.createElement('button');
-
-
-        //return newElement
+    createNewCard: function (cardTitle, boardTitle, statusId, callback) {
+        // creates new card, saves it and calls the callback function with its data
     },
-}
+    // here comes more features
+};
