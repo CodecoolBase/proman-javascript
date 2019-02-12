@@ -54,14 +54,15 @@ let dom = {
         //return: HTML object
         let newBoard = document.createElement('div');
         newBoard.id = board['id'];
-        if (board['is_active']) {
-            newBoard.setAttribute('is_active', 'true');
-        }
+        newBoard.classList.add('board');
+        newBoard.setAttribute('data-is-active', board['is_active']);
         let boardHeader = document.createElement('div');
         newBoard.appendChild(boardHeader);
         let boardTitle = document.createElement('span');
         boardTitle.textContent = board['title'];
         boardHeader.appendChild(boardTitle);
+        //create "New Card" button and append it
+        //add event listener to toggle 'data-is-active' on click
         //boardHeader.appendChild(boardTitle);
         return newBoard
     }
