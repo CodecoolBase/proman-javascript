@@ -21,14 +21,17 @@ let dataHandler = {
     },
     getBoards: function (callback) {
         // the boards are retrieved and then the callback function is called with the boards
-        callback(this._data.boards);
+        let boards = this._data.boards;
+        callback();
+        return boards;
     },
     getBoard: function (boardId, callback) {
         // the board is retrieved and then the callback function is called with the board
         let boards = getBoards();
         for (i = 0 ;i < boards.length ; i++){
             if(boardId == boards[i].id){
-                callback(boards[i])
+                callback();
+                return boards[i];
             }
         }
     },
