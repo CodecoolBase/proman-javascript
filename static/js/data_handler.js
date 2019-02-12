@@ -31,7 +31,6 @@ let dataHandler = {
                 callback(boards[i])
             }
         }
-        callback()
     },
     getStatuses: function (callback) {
         // the statuses are retrieved and then the callback function is called with the statuses
