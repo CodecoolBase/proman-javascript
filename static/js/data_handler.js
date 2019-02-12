@@ -22,30 +22,29 @@ let dataHandler = {
     getBoards: function (callback) {
         // the boards are retrieved and then the callback function is called with the boards
         let boards = this._data.boards;
-        callback();
-        return boards;
+        callback(boards);
     },
     getBoard: function (boardId, callback) {
         // the board is retrieved and then the callback function is called with the board
-        let boards = getBoards();
+        let boards = this.getBoards();
         for (i = 0 ;i < boards.length ; i++){
             if(boardId == boards[i].id){
-                callback();
-                return boards[i];
+                console.log(boards[i]);
+                callback(boards[i]);
             }
         }
     },
     getStatuses: function (callback) {
         // the statuses are retrieved and then the callback function is called with the statuses
         let statuses = dataHandler._data["statuses"];
-        callback(statuses) 
+        callback(statuses);
     },
     getStatus: function (statusId, callback) {
         // the status is retrieved and then the callback function is called with the status
         let statuses = getStatuses();
         for (i = 0 ;i < statuses.length ; i++){
             if(statusId == statuses[i].id){
-                callback(statuses[i])
+                callback(statuses[i]);
             }
         }
     },
