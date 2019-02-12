@@ -48,7 +48,7 @@ let dataHandler = {
     createNewCard: function (cardTitle, boardTitle, statusId, callback) {
         // creates new card, saves it and calls the callback function with its data
         let NewCard = document.createElement("NewCard");
-        NewCard.classList.add(statusId);
+        NewCard.classList.ad(statusId);
         NewCard.title = cardTitle;
         document.getElementsByTagName(boardTitle).appendChild(NewCard);
         callback();
