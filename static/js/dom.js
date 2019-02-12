@@ -6,6 +6,12 @@ let dom = {
     },
     showBoards: function (boards) {
         // shows boards appending them to #boards div
+        let boards_container = document.getElementById('boards');
+        boards_container.innerHTML = '';
+        boards.forEach( (board) => {
+            board = dom.makeBoard(board);
+            dom.appendToElement(boards_container, board.outerHTML);
+        });
         // it adds necessary event listeners also
         console.log(boards);
     },
@@ -28,8 +34,32 @@ let dom = {
                 elementToExtend.appendChild(childNode);
             }
         }
-
         return elementToExtend.lastChild;
-    }
+    },
     // here comes more features
+    createNewElement: function (tagName, attributes) {
+        /*
+        param: tagName (string)
+        param: attributes(dictionary)
+        return: created element*/
+        let newElement = document.createElement(tagName);
+        for(let key in attributes){
+            newElement.setAttribute(key, attributes[key]);
+        }
+        return newElement
+    },
+
+    makeBoard: function (board) {
+        //param: board: object containing board  details
+        //return: HTML object
+        let newBoard = document.createElement('div');
+        newBoard.id = board['id'];
+        if (board['is_active']) {
+            newBoard.setAttribute('is_active', 'true');
+        }
+        let boardTitle = document.createElement('h2');
+        boardTitle.textContent = board['title'];
+        newBoard.appendChild(boardTitle);
+        return newBoard
+    }
 };

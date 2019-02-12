@@ -54,14 +54,5 @@ let dataHandler = {
         //callbackfunction(callback);
     },
     // here comes more features
-    createNewElement: function (tagName, attributes) {
-        /*
-        param: tagName (string)
-        param: attributes(dictionary)
-        return: created element*/
-        //let newElement = document.createElement('button');
 
-
-        //return newElement
-    },
 };
