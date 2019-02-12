@@ -7,25 +7,18 @@ let dataHandler = {
     keyInLocalStorage: 'proman-data', // the string that you use as a key in localStorage to save your application data
     _data: {}, // it contains the boards and their cards and statuses. It is not called from outside.
     _loadData: function () {
-        // it is not called from outside
-        // loads data from local storage, parses it and put into this._data property
         this._data = JSON.parse(localStorage.getItem(keyInLocalStorage));
     },
     _saveData: function () {
-        // it is not called from outside
-        // saves the data from this._data to local storage
         localStorage.setItem(keyInLocalStorage, JSON.stringify(this._data));
     },
     init: function () {
         this._loadData();
     },
     getBoards: function (callback) {
-        // the boards are retrieved and then the callback function is called with the boards
-        let boards = this._data.boards;
-        callback(boards);
+        callback(this._data.boards);
     },
     getBoard: function (boardId, callback) {
-        // the board is retrieved and then the callback function is called with the board
         let boards = this.getBoards();
         for (i = 0 ;i < boards.length ; i++){
             if(boardId == boards[i].id){
@@ -35,9 +28,7 @@ let dataHandler = {
         }
     },
     getStatuses: function (callback) {
-        // the statuses are retrieved and then the callback function is called with the statuses
-        let statuses = dataHandler._data["statuses"];
-        callback(statuses);
+        callback(dataHandler._data["statuses"]);
     },
     getStatus: function (statusId, callback) {
         // the status is retrieved and then the callback function is called with the status
