@@ -66,3 +66,4 @@ let dom = {
         return newBoard
     }
 };
+
