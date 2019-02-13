@@ -18,10 +18,10 @@ let dataHandler = {
     getBoards: function (callback) {
         callback(this._data.boards);
     },
-    getBoard: function (boardId, callback) {
+    getBoard: function (boardID, callback) {
         let boards = this.getBoards();
         for (i = 0 ;i < boards.length ; i++){
-            if(boardId == boards[i].id){
+            if(boardID == boards[i].id){
                 console.log(boards[i]);
                 callback(boards[i]);
             }
