@@ -18,7 +18,7 @@ let dataHandler = {
     getBoards: function (callback) {
         // the boards are retrieved and then the callback function is called with the boards
         let boards = this._data.boards;
-        console.log(boards);
+        //console.log(boards);
         //callback(boards as HTML)
         callback(boards);
     },

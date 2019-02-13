@@ -13,7 +13,7 @@ let dom = {
             dom.appendToElement(boards_container, board.outerHTML);
         });
         // it adds necessary event listeners also
-        console.log(boards);
+        //console.log(boards);
     },
     loadCards: function (boardId) {
         // retrieves cards and makes showCards called
