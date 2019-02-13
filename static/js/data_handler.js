@@ -61,11 +61,12 @@ let dataHandler = {
         let newBoard = {'id': newID, 'title': boardTitle, 'is_active': true};
         boards.push(newBoard);
     },
-    createNewCard: function (cardTitle, boardTitle, statusId, callback) {
+    createNewCard: function (cardTitle, boardID, statusID, order) {
         // creates new card, saves it and calls the callback function with its data
+        let cards = dataHandler._data.cards;
+        let newID = cards.length + 1;
+        let newCard = {'id': newID, 'title': cardTitle, "board_id": boardID, "status_id": statusID, 'order': order};
+        cards.push(newCard);
     },
-    createNewCard: function (cardTitle, boardTitle, statusId, callback) {
-        // creates new card, saves it and calls the callback function with its data
-    },
-    // here comes more features
+    // here comes more features""'
 };
