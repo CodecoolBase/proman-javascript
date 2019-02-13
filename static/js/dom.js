@@ -58,20 +58,7 @@ let dom = {
         newBoard.id = board['id'];
         newBoard.classList.add('board');
         newBoard.setAttribute('data-is-active', board['is_active']);
-        let boardHeader = document.createElement('div');
-        newBoard.appendChild(boardHeader);
-        let boardTitle = document.createElement('span');
-        boardTitle.textContent = board['title'];
-        boardHeader.appendChild(boardTitle);
-        //create "New Card" button and append it
-        let newCardButton = dom.makeButton("New Card", function(){
-            console.log('here should be function creating new card');
-        });
-        boardHeader.appendChild(newCardButton);
-        //add event listener to toggle 'data-is-active' on click
-        boardHeader.addEventListener('click', function(){
-            console.log('here should be function changing data-is-active attribute');
-        });
+        dom.makeBoardHeader(newBoard, board['title']);
         return newBoard
     },
     makeButton: function (title, eventHandler) {
@@ -80,8 +67,20 @@ let dom = {
         newButton.textContent = title;
         return newButton
     },
-    makeBoardHeader: function (board) {
+    makeBoardHeader: function (board, title) {
+        let boardHeader = document.createElement('div'),
+            boardTitle = document.createElement('span');
+        boardTitle.textContent = title;
+        boardHeader.appendChild(boardTitle);
+        let newCardButton = dom.makeButton("New Card", function(){
+            console.log('here should be function creating new card');
+        });
+        boardHeader.appendChild(newCardButton);
 
+        boardHeader.addEventListener('click', function(){
+            console.log('here should be function changing data-is-active attribute');
+        });
+        board.appendChild(boardHeader);
     },
 };
 
