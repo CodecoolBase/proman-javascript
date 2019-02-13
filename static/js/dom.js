@@ -1,3 +1,8 @@
+function toggleIsActive () {
+    console.log('here should be function changing data-is-active attribute');
+}
+
+
 // It uses data_handler.js to visualize elements
 let dom = {
     loadBoards: function () {
@@ -59,6 +64,8 @@ let dom = {
         newBoard.classList.add('board');
         newBoard.setAttribute('data-is-active', board['is_active']);
         newBoard.appendChild(dom.makeBoardHeader(board));
+        newBoard.appendChild(dom.makeBoardBody(board));
+
         return newBoard
     },
     makeButton: function (title, eventHandler) {
@@ -67,6 +74,7 @@ let dom = {
         newButton.textContent = title;
         return newButton
     },
+
     makeBoardHeader: function (board) {
         let boardHeader = document.createElement('div'),
             boardTitle = document.createElement('span');
@@ -76,11 +84,15 @@ let dom = {
             console.log('here should be function creating new card');
         });
         boardHeader.appendChild(newCardButton);
-
-        boardHeader.addEventListener('click', function(){
-            console.log('here should be function changing data-is-active attribute');
-        });
+        boardTitle.addEventListener('click', toggleIsActive, true);
         return boardHeader
     },
+    makeBoardBody: function (board) {
+        let boardBody = document.createElement('div');
+        if (board['is_active']){
+            boardBody.textContent = "board body";
+        }
+        return boardBody
+    }
 };
 
