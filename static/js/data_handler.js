@@ -51,9 +51,16 @@ let dataHandler = {
     callback(cardsByBoard)
       
     },
-    getCard: function (cardId, callback) {
+    getCard: function (cardID) {
         // the card is retrieved and then the callback function is called with the card
+        let cards = dataHandler._data.cards;
+        for (i = 0; i < cards.length; i++) {
+            if (cards[i].id == cardID) {
+                return cards[i];
+            }
+        }
     },
+
     createNewBoard: function (boardTitle) {
         // creates new board, saves it and calls the callback function with its data
         let boards = dataHandler._data.boards;
