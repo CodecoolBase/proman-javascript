@@ -7,13 +7,9 @@ let dataHandler = {
     keyInLocalStorage: 'proman-data', // the string that you use as a key in localStorage to save your application data
     _data: {}, // it contains the boards and their cards and statuses. It is not called from outside.
     _loadData: function () {
-        // it is not called from outside
-        // loads data from local storage, parses it and put into this._data property
         this._data = JSON.parse(localStorage.getItem(keyInLocalStorage));
     },
     _saveData: function () {
-        // it is not called from outside
-        // saves the data from this._data to local storage
         localStorage.setItem(keyInLocalStorage, JSON.stringify(this._data));
     },
     init: function () {
@@ -21,47 +17,48 @@ let dataHandler = {
     },
     getBoards: function (callback) {
         // the boards are retrieved and then the callback function is called with the boards
-
+        let boards = this._data.boards;
+        //console.log(boards);
+        //callback(boards as HTML)
+        callback(boards);
     },
     getBoard: function (boardId, callback) {
-        // the board is retrieved and then the callback function is called with the board
+        let boards = this.getBoards();
+        for (i = 0 ;i < boards.length ; i++){
+            if(boardId == boards[i].id){
+                console.log(boards[i]);
+                callback(boards[i]);
+            }
+        }
     },
     getStatuses: function (callback) {
-        // the statuses are retrieved and then the callback function is called with the statuses
+        callback(dataHandler._data["statuses"]);
     },
     getStatus: function (statusId, callback) {
         // the status is retrieved and then the callback function is called with the status
+        let statuses = getStatuses();
+        for (i = 0 ;i < statuses.length ; i++){
+            if(statusId == statuses[i].id){
+                callback(statuses[i]);
+            }
+        }
     },
     getCardsByBoardId: function (boardId, callback) {
         // the cards are retrieved and then the callback function is called with the cards
+        let cards = dataHandler._data["cards"]
+
+
     },
     getCard: function (cardId, callback) {
         // the card is retrieved and then the callback function is called with the card
     },
     createNewBoard: function (boardTitle, callback) {
         // creates new board, saves it and calls the callback function with its data
-        let board = document.createElement(boardTitle);
-        board.classList.add("Board");
-        body.appendChild(board);
-        //callbackfunction(callback);
     },
     createNewCard: function (cardTitle, boardTitle, statusId, callback) {
         // creates new card, saves it and calls the callback function with its data
-        let NewCard = document.createElement("NewCard");
-        NewCard.classList.add(statusId);
-        NewCard.title = cardTitle;
-        document.getElementsByTagName(boardTitle).appendChild(NewCard);
-        //callbackfunction(callback);
+
     },
     // here comes more features
-    createNewElement: function (tagName, attributes) {
-        /*
-        param: tagName (string)
-        param: attributes(dictionary)
-        return: created element*/
-        //let newElement = document.createElement('button');
 
-
-        //return newElement
-    },
 };
