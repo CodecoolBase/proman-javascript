@@ -62,6 +62,16 @@ let dataHandler = {
     },
     createNewCard: function (cardTitle, boardTitle, statusId, callback) {
         // creates new card, saves it and calls the callback function with its data
+        let cards = [];
+        cards.push(dataHandler._data["statuses"])
+        let newCard = [{
+            "id": cards.length -2,
+            "title": cardTitle,
+            "board_id": boardTitle,
+            "status_id": statusId,
+            "order": 4}]
+        cards.push(newCard)
+
     },
     // here comes more features
 
