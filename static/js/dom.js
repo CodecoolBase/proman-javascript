@@ -90,6 +90,7 @@ let dom = {
     },
     makeBoardBody: function (board) {
         let boardBody = document.createElement('div');
+        boardBody.textContent = "Here should be board body";
         return boardBody
     }
 };
