@@ -64,7 +64,10 @@ let dom = {
         newBoard.classList.add('board');
         newBoard.setAttribute('data-is-active', board['is_active']);
         newBoard.appendChild(dom.makeBoardHeader(board));
-        newBoard.appendChild(dom.makeBoardBody(board));
+        if (board['is_active']){
+            newBoard.appendChild(dom.makeBoardBody(board));
+        }
+
 
         return newBoard
     },
@@ -89,9 +92,6 @@ let dom = {
     },
     makeBoardBody: function (board) {
         let boardBody = document.createElement('div');
-        if (board['is_active']){
-            boardBody.textContent = "board body";
-        }
         return boardBody
     }
 };
