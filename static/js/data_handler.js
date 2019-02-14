@@ -106,11 +106,8 @@ let dataHandler = {
     },
     getIndexById: function(iterable, id) {
         let index = 0;
-        console.log(iterable);
         for (let element of iterable) {
-            if (element.id == id) {
-                console.log(element.id);
-                console.log(id);
+            if (element.id === id) {
                 return index
             }
             index++;
