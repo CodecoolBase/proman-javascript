@@ -1,9 +1,18 @@
-function toggleIsActive () {
-    console.log('here should be function changing data-is-active attribute');
+function toggleIsActive (event) {
+    let modifiedBoard = dataHandler.getBoardById(event.target.parentElement.parentElement.id);
+    modifiedBoard.is_active = !modifiedBoard.is_active;
+
+    let boards = dataHandler._data['boards'];
+    boards.splice(dataHandler.getIndexById(boards, modifiedBoard.id), 1, modifiedBoard);
+
+    dataHandler._data['boards'] = boards;
+    dataHandler._saveData();
+    dom.loadBoards();
 }
 
-///todo: create newBoard dokonczyc
 // It uses data_handler.js to visualize elements
+let boardsContainer = document.getElementById('boards');
+
 let dom = {
     loadBoards: function () {
         // retrieves boards and makes showBoards called
@@ -15,10 +24,13 @@ let dom = {
         boards_container.innerHTML = '';
         boards.forEach( (board) => {
             board = dom.makeBoard(board);
-            dom.appendToElement(boards_container, board.outerHTML);
+
+            boardsContainer.appendChild(board);
+            //dom.appendToElement(boards_container, board.outerHTML);
+
         });
         // it adds necessary event listeners also
-        //console.log(boards);
+
     },
     loadCards: function (boardId) {
         // retrieves cards and makes showCards called
@@ -84,8 +96,9 @@ let dom = {
         let newCardButton = dom.makeButton("New Card", function(){
             console.log('here should be function creating new card');
         });
+        let toggleBodyButton = dom.makeButton('Show / Hide', toggleIsActive);
+        boardHeader.appendChild(toggleBodyButton);
         boardHeader.appendChild(newCardButton);
-        boardTitle.addEventListener('click', toggleIsActive, true);
         return boardHeader
     },
     makeBoardBody: function (board) {

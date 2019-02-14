@@ -104,6 +104,26 @@ let dataHandler = {
         cards.push(newCard);
         callback();
     },
-    // here comes more features
+    getIndexById: function(iterable, id) {
+        let index = 0;
+        console.log(iterable);
+        for (let element of iterable) {
+            if (element.id == id) {
+                console.log(element.id);
+                console.log(id);
+                return index
+            }
+            index++;
+        }
+    },
+    getBoardById: function(id) {
+        let boards = dataHandler._data['boards'];
+        for (let board of boards) {
+            if (board['id'] == id) {
+                return board
+            }
+        }
+        //throw new Error
+    },
 
 };
