@@ -67,8 +67,6 @@ let dom = {
         if (board['is_active']){
             newBoard.appendChild(dom.makeBoardBody(board));
         }
-
-
         return newBoard
     },
     makeButton: function (title, eventHandler) {

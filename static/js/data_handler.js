@@ -22,10 +22,10 @@ let dataHandler = {
         //callback(boards as HTML)
         callback(boards);
     },
-    getBoard: function (boardId, callback) {
+    getBoard: function (boardID, callback) {
         let boards = this.getBoards();
         for (i = 0 ;i < boards.length ; i++){
-            if(boardId == boards[i].id){
+            if(boardID == boards[i].id){
                 console.log(boards[i]);
                 callback(boards[i]);
             }
@@ -45,18 +45,60 @@ let dataHandler = {
     },
     getCardsByBoardId: function (boardId, callback) {
         // the cards are retrieved and then the callback function is called with the cards
-        let cards = dataHandler._data["cards"]
-
-
+        let cards = dataHandler._data["cards"];
+        let cardsByBoard = [];
+        for (i = 0 ;i < cards.length ; i++){
+            if(cards[i].board_id == boardId){
+                callback(cards[i]);
+                cardsByBoard.push(cards[i]);
+            }
+        }
     },
-    getCard: function (cardId, callback) {
+    getCard: function (cardID, callback) {
         // the card is retrieved and then the callback function is called with the card
+        let cards = dataHandler._data.cards;
+        for (i = 0; i < cards.length; i++) {
+            if (cards[i].id == cardID) {
+                callback(cards[i]);
+                return cards[i];
+            }
+        }
     },
+
     createNewBoard: function (boardTitle, callback) {
         // creates new board, saves it and calls the callback function with its data
+        let boards = dataHandler._data.boards;
+        let newID = boards.length + 1;
+        let newBoard = {'id': newID,
+                        'title': boardTitle,
+                        'is_active': true};
+        callback(newBoard);
+        boards.push(newBoard);
+    },
+    createNewCard: function (cardTitle, boardID, statusID, order) {
+        // creates new card, saves it and calls the callback function with its data
+
+        let cards = dataHandler._data.cards;
+        let newID = cards.length + 1;
+        let newCard = {'id': newID,
+                        'title': cardTitle,
+                        'board_id': boardID,
+                        'status_id': statusID,
+                        'order': order};
+        callback(newCard);
+        cards.push(newCard);
     },
     createNewCard: function (cardTitle, boardTitle, statusId, callback) {
         // creates new card, saves it and calls the callback function with its data
+        let cards = [];
+        cards.push(dataHandler._data["statuses"])
+        let newCard = [{
+            "id": cards.length -2,
+            "title": cardTitle,
+            "board_id": boardTitle,
+            "status_id": statusId,
+            "order": 4}]
+        cards.push(newCard)
 
     },
     // here comes more features
