@@ -26,7 +26,6 @@ let dataHandler = {
         let boards = this.getBoards();
         for (i = 0 ;i < boards.length ; i++){
             if(boardID == boards[i].id){
-                console.log(boards[i]);
                 callback(boards[i]);
             }
         }
@@ -49,9 +48,9 @@ let dataHandler = {
         let cardsByBoard = [];
         for (i = 0 ;i < cards.length ; i++){
             if(cards[i].board_id == boardId){
-                callback(cards[i]);
                 cardsByBoard.push(cards[i]);
             }
+            callback(cardsByBoard);
         }
     },
     getCard: function (cardID, callback) {
@@ -60,7 +59,6 @@ let dataHandler = {
         for (i = 0; i < cards.length; i++) {
             if (cards[i].id == cardID) {
                 callback(cards[i]);
-                return cards[i];
             }
         }
     },
@@ -76,18 +74,17 @@ let dataHandler = {
         callback();
 
     },
-    createNewCard: function (cardTitle, boardTitle, statusId, callback) {
+    createNewCard: function (cardTitle, boardID, statusID, order, callback) {
         // creates new card, saves it and calls the callback function with its data
-        let cards = [];
-        cards.push(dataHandler._data["statuses"])
-        let newCard = [{
-            "id": cards.length -2,
-            "title": cardTitle,
-            "board_id": boardTitle,
-            "status_id": statusId,
-            "order": 4}];
-        callback(newCard);
+        let cards = dataHandler._data.cards;
+        let newID = cards.length + 1;
+        let newCard = {'id': newID,
+                        'title': cardTitle,
+                        'board_id': boardID,
+                        'status_id': statusID,
+                        'order': order};
         cards.push(newCard);
+        callback();
     },
     // here comes more features
 
