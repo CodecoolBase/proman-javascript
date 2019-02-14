@@ -41,19 +41,6 @@ let dom = {
         }
         return elementToExtend.lastChild;
     },
-    // here comes more features
-    createNewElement: function (tagName, attributes) {
-        /*
-        param: tagName (string)
-        param: attributes(dictionary)
-        return: created element*/
-        let newElement = document.createElement(tagName);
-        for(let key in attributes){
-            newElement.setAttribute(key, attributes[key]);
-        }
-        return newElement
-    },
-
     makeBoard: function (board) {
         /*
         param: board: object containing board  details
@@ -69,10 +56,11 @@ let dom = {
         }
         return newBoard
     },
-    makeButton: function (title, eventHandler) {
+    makeButton: function (title, id, eventHandler) {
         let newButton = document.createElement('button');
         newButton.addEventListener('click', eventHandler);
         newButton.textContent = title;
+        newButton.id = id;
         return newButton
     },
 
@@ -88,7 +76,7 @@ let dom = {
         boardTitle.addEventListener('click', toggleIsActive, true);
         return boardHeader
     },
-    makeBoardBody: function (board) {
+    makeBoardBody: function (board)     {
         let boardBody = document.createElement('div');
         boardBody.textContent = "Here should be board body";
         return boardBody
