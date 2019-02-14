@@ -92,9 +92,9 @@ let dataHandler = {
             "title": cardTitle,
             "board_id": boardTitle,
             "status_id": statusId,
-            "order": 4}]
-        cards.push(newCard)
-
+            "order": 4}];
+        callback(newCard);
+        cards.push(newCard);
     },
     // here comes more features
 
