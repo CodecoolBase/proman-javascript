@@ -108,6 +108,7 @@ let dataHandler = {
         let index = 0;
         for (let element of iterable) {
             if (element.id === id) {
+
                 return index
             }
             index++;
