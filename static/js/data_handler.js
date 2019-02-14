@@ -26,8 +26,14 @@ let dataHandler = {
         let boards = this.getBoards();
         for (i = 0 ;i < boards.length ; i++){
             if(boardID == boards[i].id){
-                callback(boards[i]);
+                var board = board[i].id;
             }
+        }
+        try {
+            callback(board);
+        }
+        catch (e) {
+            console.log('You are trying to getBoard that doesnt exist');
         }
     },
     getStatuses: function (callback) {
@@ -38,8 +44,14 @@ let dataHandler = {
         let statuses = getStatuses();
         for (i = 0 ;i < statuses.length ; i++){
             if(statusId == statuses[i].id){
-                callback(statuses[i]);
+                var status = statuses[i].id;
             }
+        }
+        try {
+            callback(status);
+        }
+        catch (e) {
+            console.log('You are trying to getStatus that doesnt exist');
         }
     },
     getCardsByBoardId: function (boardId, callback) {
@@ -50,16 +62,22 @@ let dataHandler = {
             if(cards[i].board_id == boardId){
                 cardsByBoard.push(cards[i]);
             }
-            callback(cardsByBoard);
         }
+        callback(cardsByBoard);
     },
     getCard: function (cardID, callback) {
         // the card is retrieved and then the callback function is called with the card
         let cards = dataHandler._data.cards;
         for (i = 0; i < cards.length; i++) {
             if (cards[i].id == cardID) {
-                callback(cards[i]);
+                var card = cards[i].id;
             }
+        }
+        try {
+            callback(card);
+        }
+        catch (e) {
+            console.log('You are trying to getCard that doesnt exist');
         }
     },
 
