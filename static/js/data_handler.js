@@ -22,7 +22,6 @@ let dataHandler = {
         let boards = this.getBoards();
         for (i = 0 ;i < boards.length ; i++){
             if(boardID == boards[i].id){
-                console.log(boards[i]);
                 callback(boards[i]);
             }
         }
@@ -45,9 +44,9 @@ let dataHandler = {
         let cardsByBoard = [];
         for (i = 0 ;i < cards.length ; i++){
             if(cards[i].board_id == boardId){
-                callback(cards[i]);
                 cardsByBoard.push(cards[i]);
             }
+            callback(cardsByBoard);
         }
     },
     getCard: function (cardID, callback) {
@@ -56,7 +55,6 @@ let dataHandler = {
         for (i = 0; i < cards.length; i++) {
             if (cards[i].id == cardID) {
                 callback(cards[i]);
-                return cards[i];
             }
         }
     },
@@ -68,10 +66,10 @@ let dataHandler = {
         let newBoard = {'id': newID,
                         'title': boardTitle,
                         'is_active': true};
-        callback(newBoard);
         boards.push(newBoard);
+        callback();
     },
-    createNewCard: function (cardTitle, boardID, statusID, order) {
+    createNewCard: function (cardTitle, boardID, statusID, order, callback) {
         // creates new card, saves it and calls the callback function with its data
         let cards = dataHandler._data.cards;
         let newID = cards.length + 1;
@@ -80,8 +78,8 @@ let dataHandler = {
                         'board_id': boardID,
                         'status_id': statusID,
                         'order': order};
-        callback(newCard);
         cards.push(newCard);
+        callback();
     },
     createNewCard: function (cardTitle, boardTitle, statusId, callback) {
         // creates new card, saves it and calls the callback function with its data
@@ -93,8 +91,8 @@ let dataHandler = {
             "board_id": boardTitle,
             "status_id": statusId,
             "order": 4}];
-        callback(newCard);
         cards.push(newCard);
+        callback(newCard);
     },
     // here comes more features
 
