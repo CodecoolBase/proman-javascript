@@ -1,0 +1,15 @@
+{% block head %}
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/modal.css') }}">
+    <script type="text/javascript"
+            src="{{ url_for('static', filename='js/new-board-modal.js') }}"
+            defer>
+    </script>
+{% endblock %}
+
+<div id="newBoardModalWrapper" class="modal-wrapper">
+    <div id="newBoardModalBody" class="modal-body">
+        modal body
+        <button id="submitNewBoardData"></button>
+        <button id="closeButton">Close</button>
+    </div>
+</div>

@@ -1,4 +1,4 @@
-#modalWrapper{
+.modal-wrapper{
     position: fixed;
     top: 0px;
     left: 0px;
@@ -10,8 +10,9 @@
     display: none;
 }
 
-#modalBody{
+.modal-body{
     margin: auto;
     width: 300px;
     height: 100px;
+    z-index: 101;
 }
