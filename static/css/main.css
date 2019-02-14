@@ -23,3 +23,11 @@
 .Done{
 
 }
+
+h1 {
+    display: inline;
+}
+
+#newBoardButton {
+    float: right;
+}

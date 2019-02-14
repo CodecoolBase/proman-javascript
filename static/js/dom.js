@@ -2,7 +2,7 @@ function toggleIsActive () {
     console.log('here should be function changing data-is-active attribute');
 }
 
-
+///todo: create newBoard dokonczyc
 // It uses data_handler.js to visualize elements
 let dom = {
     loadBoards: function () {
