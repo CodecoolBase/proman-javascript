@@ -37,6 +37,15 @@ button{
     margin: 0 auto;
 }
 
+.board-template {
+    background: #ffffff90;
+}
+
+.add-new-board-button {
+    text-align: center;
+    margin-bottom: 5vh;
+}
+
 section.board{
     margin: 20px;
     border: aliceblue;

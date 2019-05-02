@@ -26,26 +26,65 @@ export let dom = {
             dom.showBoards(boards);
         });
     },
+
+
+    getBoardTitle: function (title) {
+        const template = document.querySelector('#board');
+        const clone = document.importNode(template.content, true);
+
+        if (title[1] == 'New Board') {
+            clone.querySelector('.board-title').textContent = title[1];
+            console.log("yes")
+        } else {
+            clone.querySelector('.board-title').textContent = title;
+        }
+
+
+    return clone;
+    },
+
+
     showBoards: function (boards) {
         // shows boards appending them to #boards div
         // it adds necessary event listeners also
-
-        let boardList = '';
-
-        for(let board of boards){
-            boardList += `
-                <li>${board.title}</li>
-            `;
+        //console.log(clone);
+        let boardList = document.createElement("section");
+        boardList.id ="board";
+        for (let board of boards) {
+            boardList.appendChild(this.getBoardTitle(board.title))
         }
 
-        const outerHtml = `
-            <ul class="board-container">
-                ${boardList}
-            </ul>
-        `;
+        let container = document.querySelector('.board-container');
+        container.appendChild(boardList);
 
-        this._appendToElement(document.querySelector('#boards'), outerHtml);
     },
+
+
+    addNewBoardEventListener: function () {
+        let addNewBoardButton = document.getElementsByClassName("add-new-board-button");
+        addNewBoardButton[0].addEventListener("click", this.addNewBoardClickHandler)
+    },
+
+
+    addNewBoardClickHandler: function () {
+        dataHandler.addNewBoard(function (newCardTitle) {
+            dom.showBoard(newCardTitle);
+        })
+
+    },
+
+    showBoard: function (newCardTitle) {
+        let boardList = document.createElement("section");
+        boardList.id ="board";
+
+        boardList.appendChild(this.getBoardTitle(newCardTitle));
+
+
+
+        let container = document.querySelector('.board-container');
+        container.appendChild(boardList);
+    },
+
     loadCards: function (boardId) {
         // retrieves cards and makes showCards called
     },
