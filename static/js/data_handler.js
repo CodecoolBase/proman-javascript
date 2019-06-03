@@ -24,6 +24,9 @@ export let dataHandler = {
     },
     getBoards: function (callback) {
         // the boards are retrieved and then the callback function is called with the boards
+        if(this._data.hasOwnProperty('boards')){
+            callback(this._data.boards);
+        }
 
         // Here we use an arrow function to keep the value of 'this' on dataHandler.
         //    if we would use function(){...} here, the value of 'this' would change.
@@ -43,6 +46,13 @@ export let dataHandler = {
     },
     getCardsByBoardId: function (boardId, callback) {
         // the cards are retrieved and then the callback function is called with the cards
+        if (this._data.hasOwnProperty('cards')) {
+            callback(this._data.cards);
+        }
+        this._api_get(`/get-cards/${boardId}`, (response) => {
+            this._data = response;
+            callback(response)
+        });
     },
     getCard: function (cardId, callback) {
         // the card is retrieved and then the callback function is called with the card
@@ -55,3 +65,5 @@ export let dataHandler = {
     }
     // here comes more features
 };
+
+sessionStorage.get
