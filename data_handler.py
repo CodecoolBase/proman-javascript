@@ -16,15 +16,40 @@ def get_boards():
     Gather all boards
     :return:
     """
-    return persistence.get_boards(force=True)
+    return persistence.get_boards()
 
 
 def get_cards_for_board(board_id):
-    persistence.clear_cache()
-    all_cards = persistence.get_cards()
-    matching_cards = []
-    for card in all_cards:
-        if card['board_id'] == str(board_id):
-            card['status_id'] = get_card_status(card['status_id'])  # Set textual status for the card
-            matching_cards.append(card)
-    return matching_cards
+    return persistence.get_cards_for_board(board_id)
+
+
+def get_cards():
+    return persistence.get_cards()
+
+
+def add_board(board_title):
+    return persistence.add_new_board(board_title)
+
+
+def add_card(card_title, board_id, status_id):
+    return persistence.add_new_card(card_title, board_id, status_id)
+
+
+def delete_board(id):
+    return persistence.delete_board(id)
+
+
+def delete_card(id):
+    return persistence.delete_card(id)
+
+
+def change_status( id, status_id):
+    return persistence.change_status( id, status_id)
+
+def rename_board(board_id, title):
+    return persistence.rename_board(board_id, title)
+
+
+def addNewUser(username, password):
+    return persistence.addNewUser(username, password)
+
