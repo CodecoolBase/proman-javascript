@@ -24,7 +24,7 @@
               <a class="navbar-brand" href="/">Swarm</a>
             </div>
             <ul class="nav navbar-nav">
-              <li class="active"><a href="/">Home</a></li>
+              <li><a href="/">Home</a></li>
               <li class="dropdown">
                 <a class="dropdown-toggle" data-toggle="dropdown" href="#">List of Table
                 <span class="caret"></span></a>
@@ -36,95 +36,18 @@
 
             </ul>
           <ul class="nav navbar-nav navbar-right">
-              {% if login %}
-              <li><a href="/register"><span class="glyphicon glyphicon-user"></span>My Page</a></li>
+              <li class="active"><a href="/register"><span class="glyphicon glyphicon-user"></span>My Page</a></li>
               <li><a href="/logout"><span ></span>Logout</a></li>
-              {% else %}
-              <li><a href="/register"><span class="glyphicon glyphicon-user"></span> Sign Up</a></li>
-              <li><a href="/login"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
-              {% endif %}
             </div>
         </nav>
-
-
+                <div class="container col-12 d-flex" style="margin-top: 15%">
+                    <div class="container col-4">
+                        <div class="jumbotron col-12">
+                            <p>{{ username }}</p>
+                            <p>{{ email }}</p>
+                            <p><a href="/logout" role="button" class="btn btn-outline-info float-left">Log Out</a></p>
+                        </div>
+                    </div>
+                </div>
     </body>
 </html>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
