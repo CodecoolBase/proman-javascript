@@ -4,7 +4,7 @@
 // (watch out: when you would like to use a property/function of an object from the
 // object itself then you must use the 'this' keyword before. For example: 'this._data' below)
 export let dataHandler = {
-    _data: {}, // it contains the boards and their cards and statuses. It is not called from outside.
+    _data: {}, // it is a "cache for all data received: boards, cards and statuses. It is not accessed from outside.
     _api_get: function (url, callback) {
         // it is not called from outside
         // loads data from API, parses it and calls the callback with it
@@ -28,7 +28,7 @@ export let dataHandler = {
         // Here we use an arrow function to keep the value of 'this' on dataHandler.
         //    if we would use function(){...} here, the value of 'this' would change.
         this._api_get('/get-boards', (response) => {
-            this._data = response;
+            this._data['boards'] = response;
             callback(response);
         });
     },
